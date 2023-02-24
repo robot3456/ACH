@@ -17,7 +17,9 @@ int main(){
 
     cout << START_MESSAGE;
 
-    Jeu.afficher_etats_caisses();
+    Jeu.affiche_etats_caisses();
+
+    Jeu.affiche_budget();
 
     return 0;
 }

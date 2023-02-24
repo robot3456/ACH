@@ -77,15 +77,6 @@ int jeu::clients_vers_caisse(){
 
 }
 
-void jeu::affiche_caisses()
-{
-    for(int i=0; i<NB_CAISSES; i++)
-    {
-        cout << "caisse " << i << endl;
-        this->caisses[i]->affiche_info();
-    }
-}
-
 void jeu::ouvrir_caisse(int n)
 {
     caisses[n]->ouvrir_caisse();
@@ -133,10 +124,34 @@ void jeu::facturation()
 
 }
 
-void jeu::afficher_etats_caisses()
+void jeu::affiche_etats_caisses()
 {
     for(int i=0; i<NB_CAISSES; i++)
     {
         cout << "Caisse " << i+1 << ":\t"<< this->caisses[i]->affiche_info() << endl;
     }   
+}
+
+void jeu::affiche_budget()
+{
+    cout << "Budget: " << this->credits << " crédits." << endl;
+}
+
+void jeu::sortir_clients_des_caisses()
+{
+    vector<int> caisse_ouvertes = get_caisses_ouvertes();
+    if(caisse_ouvertes.size()==0)
+    {
+        return; 
+    }
+
+    for(int num_caisse : caisse_ouvertes)
+    {
+        if(this->caisses[num_caisse]->get_clients_en_caisse()==0)
+        {
+            continue;
+        }
+        this->caisses[num_caisse]->sortir_client();
+    }
+
 }

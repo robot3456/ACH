@@ -22,13 +22,13 @@ public:
 
     jeu();
     int clients_vers_caisse();
-    void affiche_caisses();
+    void sortir_clients_des_caisses();
 
     void ouvrir_caisse(int n);
     void fermer_caisse(int n);
 
     void facturation();
 
-    void afficher_etats_caisses();
-    
+    void affiche_etats_caisses();
+    void affiche_budget();
 };

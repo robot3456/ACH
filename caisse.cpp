@@ -14,12 +14,9 @@ caisse::caisse()
     this->ouverte=false;
 }
 
-int caisse::sortir_client()
+void caisse::sortir_client()
 {
-    if(this->clients_en_caisse==0){ return 0; }
-    if(this->clients_en_caisse<0){ return -1; }
     this->clients_en_caisse--;
-    return 1;
 }
 
 string caisse::affiche_info()

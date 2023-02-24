@@ -13,7 +13,7 @@ public:
 
     caisse();
 
-    int sortir_client();
+    void sortir_client();
 
     string affiche_info();
 
