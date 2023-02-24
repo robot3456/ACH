@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ostream>
 
 #include "jeu.hpp"
 
@@ -18,8 +19,8 @@ int main(){
     cout << START_MESSAGE;
 
     Jeu.affiche_etats_caisses();
-
     Jeu.affiche_budget();
+    Jeu.affiche_position_clients();
 
     return 0;
 }

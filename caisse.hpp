@@ -8,6 +8,7 @@ class caisse
 private:
     uint16_t clients_en_caisse;
     bool ouverte;
+    bool etat_a_changer;
     
 public:
 
@@ -24,4 +25,9 @@ public:
     void fermer_caisse();
 
     int get_clients_en_caisse();
+
+    void changer_etat();
+    void reset_changement();
+    string get_changement();
+
 };

@@ -12,6 +12,7 @@ caisse::caisse()
 {
     this->clients_en_caisse=CLIENT_EN_CAISSE_DEBUT;
     this->ouverte=false;
+    this->etat_a_changer=false;
 }
 
 void caisse::sortir_client()
@@ -75,4 +76,32 @@ void caisse::fermer_caisse()
 int caisse::get_clients_en_caisse()
 {
     return this->clients_en_caisse;
+}
+
+void caisse::changer_etat()
+{
+    this->etat_a_changer=!this->etat_a_changer;
+}
+
+void caisse::reset_changement()
+{
+    this->etat_a_changer=false;
+}
+
+string caisse::get_changement()
+{
+    if(this->etat_a_changer==this->ouverte)
+    {
+        return "[\033[1;33m-\033[0m]";
+    }
+    else
+    {
+        if(this->ouverte)
+        {
+            return "[\033[1;31mF\033[0m]";
+        }
+        else {
+            return "[\033[1;32mO\033[0m]";
+        }
+    }
 }

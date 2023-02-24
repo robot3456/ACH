@@ -8,7 +8,6 @@
 
 using namespace std;
 
-#define NB_CAISSES 10
 #define STARTING_CREDITS 1000
 #define STARTING_CLIENTS_EN_COURSE 100
 #define STARTING_CLIENTS_EN_ATTENTE 0
@@ -23,20 +22,21 @@ jeu::jeu()
 {
     //initialisation par défaut du jeu
     this->credits=STARTING_CREDITS;
-    this->clients_course=STARTING_CLIENTS_EN_COURSE;
+    this->clients_courses=STARTING_CLIENTS_EN_COURSE;
     this->clients_en_attente=STARTING_CLIENTS_EN_ATTENTE;
 
     for(int i=0; i<NB_CAISSES; i++)
     {
         this->caisses[i] = new caisse();
+        this->changements_caisse[i] = '-';
     }
 
 }
 
 int jeu::clients_vers_caisse(){
 
-    if(clients_course==0){ return 0; }  //on fait rien si pas de clients qui font des course
-    if(clients_course<0){ return -1; }  //erreur si nombre de clients négatif
+    if(clients_courses==0){ return 0; }  //on fait rien si pas de clients qui font des course
+    if(clients_courses<0){ return -1; }  //erreur si nombre de clients négatif
 
     //on décide combien de clients vont aller en caisse
 
@@ -44,7 +44,7 @@ int jeu::clients_vers_caisse(){
     
     uint16_t clients_a_placer = 0;
 
-    for(int i=0; i<this->clients_course; i++)//on itère sur tout les clients
+    for(int i=0; i<this->clients_courses; i++)//on itère sur tout les clients
     {
         if(std::rand()%2) //1 chance sur 2 d'aller en caisse, =0 ou 1, si 1 on le met à placer
         {
@@ -53,7 +53,7 @@ int jeu::clients_vers_caisse(){
     }
 
     //on enlève les clients à placer des clients qui font les courses
-    this->clients_course -= clients_a_placer;
+    this->clients_courses -= clients_a_placer;
 
     //on créer une liste des caisses ouvertes
 
@@ -128,7 +128,7 @@ void jeu::affiche_etats_caisses()
 {
     for(int i=0; i<NB_CAISSES; i++)
     {
-        cout << "Caisse " << i+1 << ":\t"<< this->caisses[i]->affiche_info() << endl;
+        cout << this->caisses[i]->get_changement() << " Caisse " << i+1 << ":\t"<< this->caisses[i]->affiche_info() << endl;
     }   
 }
 
@@ -153,5 +153,18 @@ void jeu::sortir_clients_des_caisses()
         }
         this->caisses[num_caisse]->sortir_client();
     }
+
+}
+
+void jeu::affiche_position_clients()
+{
+    vector<int> caisse_ouvertes = get_caisses_ouvertes();
+    int clients_en_caisses = 0;
+    for(int num_caisse: caisse_ouvertes)
+    {
+        clients_en_caisses += this->caisses[num_caisse]->get_clients_en_caisse();
+    }
+
+    cout << "Clients dans l'hypermarché: " << this->clients_courses << ", en attente de caisse: " << this->clients_en_attente << " et aux caisses: " << clients_en_caisses << ".\n";
 
 }
