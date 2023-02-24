@@ -1,4 +1,7 @@
 #include <stdint.h>
+#include <string>
+
+using namespace std;
 
 class caisse
 {
@@ -12,9 +15,7 @@ public:
 
     int sortir_client();
 
-    void affiche_clients_en_caisse();
-    void affiche_ouverte();
-    void affiche_info();
+    string affiche_info();
 
     bool isOuverte();
 

@@ -28,4 +28,7 @@ public:
     void fermer_caisse(int n);
 
     void facturation();
+
+    void afficher_etats_caisses();
+    
 };

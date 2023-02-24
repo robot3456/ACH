@@ -1,7 +1,10 @@
 #include "caisse.hpp"
 #include <iostream>
+#include <string>
 
 #define CLIENT_EN_CAISSE_DEBUT 0
+
+#define MAX_CLIENTS_A_AFFICHER 10
 
 using namespace std;
 
@@ -19,27 +22,37 @@ int caisse::sortir_client()
     return 1;
 }
 
-void caisse::affiche_clients_en_caisse()
-{
-    cout << "nombre de clients en caisse : " << this->clients_en_caisse << endl;
-}
-
-
-void caisse::affiche_ouverte()
-{
-    if(this->ouverte) { cout << "caisse ouverte" << endl; }
-    else { cout << "caisse fermé" << endl; }
-}
-
-void caisse::affiche_info()
+string caisse::affiche_info()
 {   
-    if(this->ouverte)
+    if(!this->ouverte)
     {
-        cout << "ouverte | ";
-    }else{
-        cout << "fermée | ";
+        return "Fermée";
     }
-    cout << this->clients_en_caisse << " clients" << endl;
+
+    string info = "Ouverte | Clients :";
+
+    if(this->clients_en_caisse <= MAX_CLIENTS_A_AFFICHER)
+    {
+        for(int i=0; i<this->clients_en_caisse; i++)
+        {
+            info.append("*");
+        }
+        return info;
+    }else{
+
+        for(int i=0; i<MAX_CLIENTS_A_AFFICHER; i++)
+        {
+            info.append("*");
+        }
+
+        if(this->clients_en_caisse==MAX_CLIENTS_A_AFFICHER)
+        {
+            return info;
+        }
+
+        info.append("(+%d)",this->clients_en_caisse-MAX_CLIENTS_A_AFFICHER);
+        return info;
+    }
 }
 
 bool caisse::isOuverte()

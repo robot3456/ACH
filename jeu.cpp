@@ -132,3 +132,11 @@ void jeu::facturation()
     this->credits -= PRIX_TOUR_DE_JEU;
 
 }
+
+void jeu::afficher_etats_caisses()
+{
+    for(int i=0; i<NB_CAISSES; i++)
+    {
+        cout << "Caisse " << i+1 << ":\t"<< this->caisses[i]->affiche_info() << endl;
+    }   
+}
