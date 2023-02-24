@@ -17,8 +17,10 @@ public:
     void affiche_info();
 
     bool isOuverte();
+
     void add_client_en_caisse();
     void ouvrir_caisse();
     void fermer_caisse();
 
+    int get_clients_en_caisse();
 };

@@ -1,5 +1,9 @@
 #include <stdint.h>
+#include <vector>
+
 #include "caisse.hpp"
+
+using namespace std;
 
 class jeu
 {
@@ -12,6 +16,8 @@ private:
     
     caisse *caisses[10];
 
+    vector<int> get_caisses_ouvertes();
+
 public:
 
     jeu();
@@ -20,4 +26,6 @@ public:
 
     void ouvrir_caisse(int n);
     void fermer_caisse(int n);
+
+    void facturation();
 };

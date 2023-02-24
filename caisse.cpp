@@ -61,3 +61,8 @@ void caisse::fermer_caisse()
 {
     this->ouverte=false;
 }
+
+int caisse::get_clients_en_caisse()
+{
+    return this->clients_en_caisse;
+}

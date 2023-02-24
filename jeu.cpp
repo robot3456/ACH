@@ -13,6 +13,12 @@ using namespace std;
 #define STARTING_CLIENTS_EN_COURSE 100
 #define STARTING_CLIENTS_EN_ATTENTE 0
 
+#define PRIX_PAR_CAISSE_OUVERTE 3
+#define PRIX_PAR_CLIENT_EN_ATTENTE 2
+#define PRIX_PAR_CLIENT_EN_CAISSE 1
+#define PRIX_OUVERTURE_FERMETURE_CAISSE 2
+#define PRIX_TOUR_DE_JEU 1
+
 jeu::jeu()
 {
     //initialisation par défaut du jeu
@@ -50,20 +56,13 @@ int jeu::clients_vers_caisse(){
     this->clients_course -= clients_a_placer;
 
     //on créer une liste des caisses ouvertes
-    vector<int> caisse_ouvertes;
 
-    for(int i=0;i<NB_CAISSES; i++)
-    {
-        if(caisses[i]->isOuverte())
-        {
-            caisse_ouvertes.push_back(i);
-        }
-    }
+    vector<int> caisse_ouvertes = this->get_caisses_ouvertes();
     
     //si aucune caisse ouverte alors tout les clients à placer sont mis en attente
     if(caisse_ouvertes.size()==0)
     {
-        this->clients_en_attente=clients_a_placer;
+        this->clients_en_attente+=clients_a_placer;
         return 1; //fonction s'execute avec succès
     }
 
@@ -95,4 +94,41 @@ void jeu::ouvrir_caisse(int n)
 void jeu::fermer_caisse(int n)
 {
     caisses[n]->fermer_caisse();
+}
+
+vector<int> jeu::get_caisses_ouvertes()
+{
+    vector<int> caisse_ouvertes;
+
+    for(int i=0;i<NB_CAISSES; i++)
+    {
+        if(caisses[i]->isOuverte())
+        {
+            caisse_ouvertes.push_back(i);
+        }
+    }
+    return caisse_ouvertes;
+}
+
+void jeu::facturation()
+{
+    //Facturation des caisses ouvertes
+    vector<int> caisse_ouvertes = get_caisses_ouvertes();
+
+    uint16_t nb_caisses_ouvertes = caisse_ouvertes.size();
+
+    this->credits -= caisse_ouvertes.size()*PRIX_PAR_CAISSE_OUVERTE;
+
+    //Facturation des clients en attente de caisse
+    this->credits -= this->clients_en_attente*PRIX_PAR_CLIENT_EN_ATTENTE;
+
+    //Facturation des clients en caisse
+    for(int num_caisse : caisse_ouvertes)
+    {
+        this->credits -= caisses[num_caisse]->get_clients_en_caisse()*PRIX_PAR_CLIENT_EN_CAISSE;
+    }
+
+    //Facturation du tour du jeu
+    this->credits -= PRIX_TOUR_DE_JEU;
+
 }
