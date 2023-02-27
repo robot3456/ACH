@@ -36,5 +36,7 @@ public:
 
     void affiche_etats_caisses();
     void affiche_budget();
-    void affiche_position_clients();
+    void affiche_position_clients(); 
+
+    void actions_sur_caisse();
 };

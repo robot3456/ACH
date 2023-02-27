@@ -5,6 +5,8 @@
 #include <time.h>
 #include <iostream>
 #include <vector>
+#include <cctype>
+#include <string>
 
 using namespace std;
 
@@ -167,4 +169,39 @@ void jeu::affiche_position_clients()
 
     cout << "Clients dans l'hypermarché: " << this->clients_courses << ", en attente de caisse: " << this->clients_en_attente << " et aux caisses: " << clients_en_caisses << ".\n";
 
+}
+
+void jeu::actions_sur_caisse()
+{
+
+    string choix;
+
+    while(true)
+    {
+        cout << "Choisir une caisse à changer[C], Passer et appliquer tout les changements[P] :";
+        getline(cin, choix);
+        
+        if (!choix.empty() && choix[choix.length()-1] == '\n')
+        {
+            choix.erase(choix.length()-1);
+        }
+
+        if(cin.fail())
+        {
+            cout << "Erreur dans la saisie du choix, veuillez réessayer." << endl;
+            cin.clear();
+            continue;
+        }
+
+        if(choix.length()>=2)
+        {
+            cout << "Veuillez rentrez une seule lettre." << endl;
+            cin.clear();
+            continue;
+        }
+        
+        for(auto & c: choix) c = toupper(c);
+        cout << "choix : " << choix << endl;
+    }
+    
 }

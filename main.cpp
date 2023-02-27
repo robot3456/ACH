@@ -22,5 +22,7 @@ int main(){
     Jeu.affiche_budget();
     Jeu.affiche_position_clients();
 
+    Jeu.actions_sur_caisse();
+
     return 0;
 }
