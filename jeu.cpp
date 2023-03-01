@@ -1,12 +1,15 @@
 #include "jeu.hpp"
 
 #include <cstddef>
+#include <cstdint>
+#include <exception>
 #include <stdlib.h>
 #include <time.h>
 #include <iostream>
 #include <vector>
 #include <cctype>
 #include <string>
+#include <limits>
 
 using namespace std;
 
@@ -103,7 +106,7 @@ vector<int> jeu::get_caisses_ouvertes(){
     vector<int> caisse_ouvertes;
 
     for(int i=0;i<NB_CAISSES; i++){
-        if(caisses[i]->isOuverte()){
+        if(caisses[i]->est_Ouverte()){
             caisse_ouvertes.push_back(i);
         }
     }
@@ -171,7 +174,7 @@ void jeu::affiche_position_clients(){
 
 }
 
-void jeu::actions_sur_caisse(){
+int jeu::actions_sur_caisse(){
 
     string choix;
 
@@ -200,12 +203,54 @@ void jeu::actions_sur_caisse(){
         
         for(auto & c: choix) c = toupper(c);
 
-        cout << "choix : " << choix << endl;
+        if(choix == "C")
+        {
+            int choix_num_caisse=0;
+            string str_choix_num_caisse;
 
-        // for(int i; i<this->)
+            while(true)
+            {
+                cout << "Veuillez choisir la caisse à ouvrir/fermer[1-10] : ";
+                getline(cin, str_choix_num_caisse);
+                
+                try {
+                    choix_num_caisse=stoi(str_choix_num_caisse);
+                    if(choix_num_caisse<=NB_CAISSES && choix_num_caisse>=0)
+                    {
+                        cout << "choix numéro de caisse: " << choix_num_caisse << endl;
+                        break;
+                    }
+                    cout << "Veuillez entrer un nombre entre 0 et 10" << endl;
+                } catch (exception &err) {
+                    cout << "Veuillez entrer un nombre." << endl;
+                }
+            }
+            this->caisses[choix_num_caisse-1]->changer_etat();
+            return 0;
 
-        affiche_etats_caisses();
+        }
+        else if(choix == "P")
+        {
+            return 1;
+        }
+        else
+        {
+            cout << "Veuillez choisir \"C\" ou \"P\"" << endl;
+            return 0;
+        }
 
     }
-    
+
+}
+
+void jeu::changer_caisses()
+{
+    for(int i=0; i<NB_CAISSES; i++)
+    {
+        if (this->caisses[i]->a_changer())
+        {
+            this->caisses[i]->changer_caisse();
+            this->credits -= PRIX_OUVERTURE_FERMETURE_CAISSE;
+        }
+    }
 }

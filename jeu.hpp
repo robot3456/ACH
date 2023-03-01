@@ -24,6 +24,7 @@ private:
     vector<int> get_caisses_ouvertes();
     string formater_changement(char c);
 
+
 public:
 
     jeu();
@@ -45,5 +46,6 @@ public:
     void affiche_budget();
     void affiche_position_clients(); 
 
-    void actions_sur_caisse();
+    int actions_sur_caisse();
+    void changer_caisses();
 };

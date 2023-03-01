@@ -45,7 +45,7 @@ string caisse::affiche_info(){
     }
 }
 
-bool caisse::isOuverte(){
+bool caisse::est_Ouverte(){
     return ouverte;
 }
 
@@ -86,4 +86,14 @@ string caisse::get_changement(){
             return "[\033[1;32mO\033[0m]";
         }
     }
+}
+
+bool caisse::a_changer()
+{
+    return this->etat_a_changer;
+}
+
+void caisse::changer_caisse()
+{
+    this->ouverte = !this->ouverte;
 }

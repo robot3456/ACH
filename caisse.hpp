@@ -18,17 +18,20 @@ public:
 
     string affiche_info();
 
-    bool isOuverte();
+    bool est_Ouverte();
 
     void add_client_en_caisse();
+
     void ouvrir_caisse();
     void fermer_caisse();
+    void changer_caisse();
 
     // Getter
     int get_clients_en_caisse();
 
     void changer_etat();
     void reset_changement();
+    bool a_changer();
     string get_changement();
 
 

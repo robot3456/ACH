@@ -17,16 +17,30 @@ int main(){
     jeu Jeu;
     string restart="o";
 
+    cout << START_MESSAGE;
+
     while ( restart=="o"){
 
         while (!Jeu.getHypermarcheVide() || Jeu.getCredits()<0 ){
 
-            cout << START_MESSAGE;
+            int continuer=-1;
 
-            Jeu.affiche_etats_caisses();
-            Jeu.affiche_budget();
-            Jeu.affiche_position_clients();
-            Jeu.actions_sur_caisse();
+            do
+            {   
+                Jeu.clients_vers_caisse();
+                Jeu.affiche_etats_caisses();
+                Jeu.affiche_budget();
+                Jeu.affiche_position_clients();
+
+                continuer = Jeu.actions_sur_caisse();
+                cout << "\n\n\n\n\n\n" << endl;
+
+            }while(!continuer);
+
+            Jeu.facturation();            
+
+            Jeu.changer_caisses();
+            
         }
 
         cout << "Voulez vous recommencer ? o[oui]/n[non]" << endl;
