@@ -13,6 +13,7 @@ class jeu
 private:
 
     uint16_t credits;
+    bool hypermarche_vide;
     
     uint16_t clients_courses;
     uint16_t clients_en_attente;
@@ -26,6 +27,12 @@ private:
 public:
 
     jeu();
+
+    bool getHypermarcheVide();
+    void setHypermarcheVide(bool state);
+
+    uint16_t getCredits();
+
     int clients_vers_caisse();
     void sortir_clients_des_caisses();
 

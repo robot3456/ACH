@@ -15,14 +15,37 @@ using namespace std;
 int main(){
 
     jeu Jeu;
+    string restart="o";
 
-    cout << START_MESSAGE;
+    while ( restart=="o"){
 
-    Jeu.affiche_etats_caisses();
-    Jeu.affiche_budget();
-    Jeu.affiche_position_clients();
+        while (!Jeu.getHypermarcheVide() || Jeu.getCredits()<0 ){
 
-    Jeu.actions_sur_caisse();
+            cout << START_MESSAGE;
+
+            Jeu.affiche_etats_caisses();
+            Jeu.affiche_budget();
+            Jeu.affiche_position_clients();
+            Jeu.actions_sur_caisse();
+        }
+
+        cout << "Voulez vous recommencer ? o[oui]/n[non]" << endl;
+        getline(cin, restart);
+
+    }
+
+
+
+    if (Jeu.getHypermarcheVide()){
+        cout << "GAGNE" << endl;
+    } 
+    else {
+        cout << "PERDU" << endl;
+    }
+
+    cout << "Votre score est :" << Jeu.getCredits() << " credits" << endl ;
+
+
 
     return 0;
 }

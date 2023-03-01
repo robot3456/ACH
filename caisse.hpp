@@ -24,6 +24,7 @@ public:
     void ouvrir_caisse();
     void fermer_caisse();
 
+    // Getter
     int get_clients_en_caisse();
 
     void changer_etat();
