@@ -15,3 +15,4 @@ TODO:
 - Regrouper les mêmes méthodes au même endroit dans le code (par ex tout les affiche au même endroite, etc...)
 - Commenter le code 
 - Mettre tout en camel case
+- Enlever les accolades s'il y a un if d'une seule ligne
