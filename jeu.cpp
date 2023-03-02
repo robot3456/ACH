@@ -61,34 +61,40 @@ int jeu::clients_vers_caisse(){
 
     //on décide combien de clients vont aller en caisse
 
+    cout << "HERE 4" << endl;
+
     std::srand(time(NULL));
     
-    uint16_t clients_a_placer = 0;
-
     for(int i=0; i<this->clients_courses; i++){ //on itère sur tout les clients
         if(std::rand()%2){ //1 chance sur 2 d'aller en caisse, =0 ou 1, si 1 on le met à placer
-            clients_a_placer++;
+            this->clients_courses--;
+            this->clients_en_attente++;
         }
     }
-
-    //on enlève les clients à placer des clients qui font les courses
-    this->clients_courses -= clients_a_placer;
-
-    //on créer une liste des caisses ouvertes
     
+    cout << "HERE 5" << endl;
+
     vector<int> caisse_ouvertes = this->get_caisses_ouvertes();
-    
-    //si aucune caisse ouverte alors tout les clients à placer sont mis en attente
-    if(caisse_ouvertes.size()==0){
-        this->clients_en_attente+=clients_a_placer;
-        return 1; //fonction s'execute avec succès
-    }
 
     int nb_caisse_ouvertes = caisse_ouvertes.size();
 
-    for(int i=0; i<clients_a_placer; i++){
-        this->caisses[caisse_ouvertes[rand()%nb_caisse_ouvertes]]->add_client_en_caisse();
+    cout << "nb caisses ouvertes : " << nb_caisse_ouvertes << endl;
+
+
+    cout << "HERE 6" << endl;
+    if(nb_caisse_ouvertes>0)
+    {
+
+        for(int i=0; i<this->clients_en_attente; i++){
+
+            int rand_caisse_ouverte = caisse_ouvertes[rand()%nb_caisse_ouvertes];
+
+            this->caisses[rand_caisse_ouverte]->add_client_en_caisse();
+            this->clients_en_attente--;
+        }
+
     }
+    
 
     return 1;
 

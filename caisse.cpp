@@ -36,8 +36,6 @@ string caisse::affiche_info(){
             info.append("*");
         }
 
-        //info.append("*",MAX_CLIENTS_A_AFFICHER);
-
         if(this->clients_en_caisse==MAX_CLIENTS_A_AFFICHER){
             return info;
         }
