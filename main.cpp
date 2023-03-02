@@ -21,10 +21,10 @@ int main(){
 
     while ( restart=="o"){
 
-        while (!Jeu.getHypermarcheVide() || Jeu.getCredits()<0 ){
+        while (!Jeu.hypermarche_est_vide() && Jeu.getCredits()>0 ){
 
             int continuer=-1;
-            
+
             Jeu.sortir_clients_des_caisses();
             Jeu.clients_vers_caisse();
             do
@@ -41,7 +41,6 @@ int main(){
             Jeu.changer_caisses();
             Jeu.facturation();            
 
-            
         }
 
         cout << "Voulez vous recommencer ? o[oui]/n[non]" << endl;

@@ -32,7 +32,9 @@ public:
     bool getHypermarcheVide();
     void setHypermarcheVide(bool state);
 
-    uint16_t getCredits();
+    bool hypermarche_est_vide();
+
+    int getCredits();
 
     int clients_vers_caisse();
     void sortir_clients_des_caisses();

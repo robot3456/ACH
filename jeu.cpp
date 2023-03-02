@@ -48,7 +48,7 @@ void jeu::setHypermarcheVide(bool newState){
 
 
 // Duplicata de la fonction affiche_budget()
-uint16_t jeu::getCredits(){
+int jeu::getCredits(){
     return this->credits;
 }
 
@@ -261,4 +261,20 @@ void jeu::changer_caisses()
             this->caisses[i]->reset_changement();
         }
     }
+}
+
+bool jeu::hypermarche_est_vide()
+{
+    if(this->clients_courses>0)
+        return false;
+
+    if(this->clients_en_attente>0)
+        return false;
+
+    for(int i; i<NB_CAISSES; i++)
+        if (this->caisses[i]->get_clients_en_caisse()>0)
+            return false;
+        
+    
+    return true;
 }
