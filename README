@@ -14,3 +14,4 @@ TODO:
 - AJouter une fonction pour n'afficher que le tour actuelle (supprimer les trucs avant avec un clear(pas ouf) ou autre fonction)
 - Regrouper les mêmes méthodes au même endroit dans le code (par ex tout les affiche au même endroite, etc...)
 - Commenter le code 
+- Mettre tout en camel case
