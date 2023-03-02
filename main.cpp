@@ -39,12 +39,20 @@ int main(){
             }while(!continuer);
 
             Jeu.changer_caisses();
-            Jeu.facturation();            
+            Jeu.facturation();
+
+            // if (Jeu.getCredits() <= 0){
+            //     Jeu.getCredits() = 0;
+            // }
 
         }
 
         cout << "Voulez vous recommencer ? o[oui]/n[non]" << endl;
         getline(cin, restart);
+
+        if (restart=="o"){
+            Jeu.reset();
+        }
 
     }
 

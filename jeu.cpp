@@ -29,7 +29,9 @@ jeu::jeu(){
     this->credits=STARTING_CREDITS;
     this->clients_courses=STARTING_CLIENTS_EN_COURSE;
     this->clients_en_attente=STARTING_CLIENTS_EN_ATTENTE;
+
     this->hypermarche_vide=false;
+    this->nombre_tours_joues=0;
 
     for(int i=0; i<NB_CAISSES; i++){
         this->caisses[i] = new caisse();
@@ -50,6 +52,20 @@ void jeu::setHypermarcheVide(bool newState){
 // Duplicata de la fonction affiche_budget()
 int jeu::getCredits(){
     return this->credits;
+}
+
+void jeu::reset(){
+
+    this->credits=STARTING_CREDITS;
+    this->hypermarche_vide=false;
+    this->clients_courses=STARTING_CLIENTS_EN_COURSE;
+    this->clients_en_attente=0;
+    // this->clients_en_caisse =0;
+
+    for(int i=0; i<NB_CAISSES; i++){
+        this->caisses[i]->reset_clients_en_caisse();
+        this->caisses[i]->fermer_caisse();
+    }
 }
 
 

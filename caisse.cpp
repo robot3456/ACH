@@ -69,6 +69,11 @@ int caisse::get_clients_en_caisse(){
     return this->clients_en_caisse;
 }
 
+void caisse::reset_clients_en_caisse(){
+    this->clients_en_caisse=0;
+}
+
+
 void caisse::changer_etat(){
     this->etat_a_changer=!this->etat_a_changer;
 }

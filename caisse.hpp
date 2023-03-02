@@ -28,6 +28,7 @@ public:
 
     // Getter
     int get_clients_en_caisse();
+    void reset_clients_en_caisse();
 
     void changer_etat();
     void reset_changement();

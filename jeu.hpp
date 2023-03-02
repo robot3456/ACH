@@ -17,6 +17,7 @@ private:
     
     uint16_t clients_courses;
     uint16_t clients_en_attente;
+    uint16_t nombre_tours_joues;
     
     caisse *caisses[NB_CAISSES];
     char changements_caisse[NB_CAISSES];
@@ -35,6 +36,8 @@ public:
     bool hypermarche_est_vide();
 
     int getCredits();
+
+    void reset();
 
     int clients_vers_caisse();
     void sortir_clients_des_caisses();
