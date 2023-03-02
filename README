@@ -16,3 +16,4 @@ TODO:
 - Commenter le code 
 - Mettre tout en camel case
 - Enlever les accolades s'il y a un if d'une seule ligne
+- Enlever les include qui servent à rien
