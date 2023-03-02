@@ -12,3 +12,4 @@ TODO:
 - Changer les noms des classes et les {}
 - Ajouter une lettre pour annuler la saisie d'une caisse à ouvrir
 - AJouter une fonction pour n'afficher que le tour actuelle (supprimer les trucs avant avec un clear(pas ouf) ou autre fonction)
+- Regrouper les mêmes méthodes au même endroit dans le code (par ex tout les affiche au même endroite, etc...)
