@@ -1,4 +1,4 @@
-#include "jeu.hpp"
+#include "Jeu.hpp"
 
 #include <cstddef>
 #include <cstdint>
@@ -23,7 +23,7 @@ using namespace std;
 #define PRIX_OUVERTURE_FERMETURE_CAISSE 2
 #define PRIX_TOUR_DE_JEU 1
 
-jeu::jeu(){
+Jeu::Jeu(){
 
     //initialisation par défaut du jeu
     this->credits=STARTING_CREDITS;
@@ -34,27 +34,27 @@ jeu::jeu(){
     this->nombre_tours_joues=0;
 
     for(int i=0; i<NB_CAISSES; i++){
-        this->caisses[i] = new caisse();
+        this->caisses[i] = new Caisse();
         this->changements_caisse[i] = '-';
     }
 }
 
 
-bool jeu::getHypermarcheVide(){
+bool Jeu::getHypermarcheVide(){
     return this->hypermarche_vide;
 }
 
-void jeu::setHypermarcheVide(bool newState){
+void Jeu::setHypermarcheVide(bool newState){
     this->hypermarche_vide = newState;
 }
 
 
 // Duplicata de la fonction affiche_budget()
-int jeu::getCredits(){
+int Jeu::getCredits(){
     return this->credits;
 }
 
-void jeu::reset(){
+void Jeu::reset(){
 
     this->credits=STARTING_CREDITS;
     this->hypermarche_vide=false;
@@ -70,7 +70,7 @@ void jeu::reset(){
 
 
 
-int jeu::clients_vers_caisse(){
+int Jeu::clients_vers_caisse(){
 
     if(clients_courses==0){ return 0; }  //on fait rien si pas de clients qui font des course
     if(clients_courses<0){ return -1; }  //erreur si nombre de clients négatif
@@ -93,8 +93,7 @@ int jeu::clients_vers_caisse(){
 
     cout << "nb caisses ouvertes : " << nb_caisse_ouvertes << endl;
 
-    if(nb_caisse_ouvertes>0)
-    {
+    if(nb_caisse_ouvertes>0){
 
         for(int i=0; i<this->clients_en_attente; i++){
 
@@ -103,23 +102,19 @@ int jeu::clients_vers_caisse(){
             this->caisses[rand_caisse_ouverte]->add_client_en_caisse();
             this->clients_en_attente--;
         }
-
     }
-    
-
     return 1;
-
 }
 
-void jeu::ouvrir_caisse(int n){
+void Jeu::ouvrir_caisse(int n){
     caisses[n]->ouvrir_caisse();
 }
 
-void jeu::fermer_caisse(int n){
+void Jeu::fermer_caisse(int n){
     caisses[n]->fermer_caisse();
 }
 
-vector<int> jeu::get_caisses_ouvertes(){
+vector<int> Jeu::get_caisses_ouvertes(){
     vector<int> caisse_ouvertes;
 
     for(int i=0;i<NB_CAISSES; i++){
@@ -130,7 +125,7 @@ vector<int> jeu::get_caisses_ouvertes(){
     return caisse_ouvertes;
 }
 
-void jeu::facturation(){
+void Jeu::facturation(){
 
     //Facturation des caisses ouvertes
     vector<int> caisse_ouvertes = get_caisses_ouvertes();
@@ -151,19 +146,18 @@ void jeu::facturation(){
     this->credits -= PRIX_TOUR_DE_JEU;
 }
 
-void jeu::affiche_etats_caisses(){
+void Jeu::affiche_etats_caisses(){
 
     for(int i=0; i<NB_CAISSES; i++){
         cout << this->caisses[i]->get_changement() << " Caisse " << i+1 << ":\t"<< this->caisses[i]->affiche_info() << endl;
     }   
 }
 
-void jeu::affiche_budget(){
+void Jeu::affiche_budget(){
     cout << "Budget: " << this->credits << " crédits." << endl;
 }
 
-void jeu::sortir_clients_des_caisses()
-{
+void Jeu::sortir_clients_des_caisses(){
     vector<int> caisse_ouvertes = get_caisses_ouvertes();
     if(caisse_ouvertes.size()==0){
         return; 
@@ -178,7 +172,7 @@ void jeu::sortir_clients_des_caisses()
 
 }
 
-void jeu::affiche_position_clients(){
+void Jeu::affiche_position_clients(){
 
     vector<int> caisse_ouvertes = get_caisses_ouvertes();
     int clients_en_caisses = 0;
@@ -186,12 +180,10 @@ void jeu::affiche_position_clients(){
     for(int num_caisse: caisse_ouvertes){
         clients_en_caisses += this->caisses[num_caisse]->get_clients_en_caisse();
     }
-
     cout << "Clients dans l'hypermarché: " << this->clients_courses << ", en attente de caisse: " << this->clients_en_attente << " et aux caisses: " << clients_en_caisses << ".\n";
-
 }
 
-int jeu::actions_sur_caisse(){
+int Jeu::actions_sur_caisse(){
 
     string choix;
 
@@ -220,25 +212,22 @@ int jeu::actions_sur_caisse(){
         
         for(auto & c: choix) c = toupper(c);
 
-        if(choix == "C")
-        {
+        if(choix == "C"){
             int choix_num_caisse=0;
             string str_choix_num_caisse;
 
-            while(true)
-            {
+            while(true){
                 cout << "Veuillez choisir la caisse à ouvrir/fermer[1-10] : ";
                 getline(cin, str_choix_num_caisse);
                 
-                try {
+                try{
                     choix_num_caisse=stoi(str_choix_num_caisse);
-                    if(choix_num_caisse<=NB_CAISSES && choix_num_caisse>=0)
-                    {
+                    if(choix_num_caisse<=NB_CAISSES && choix_num_caisse>=0){
                         cout << "choix numéro de caisse: " << choix_num_caisse << endl;
                         break;
                     }
                     cout << "Veuillez entrer un nombre entre 0 et 10" << endl;
-                } catch (exception &err) {
+                }catch (exception &err){
                     cout << "Veuillez entrer un nombre." << endl;
                 }
             }
@@ -246,12 +235,10 @@ int jeu::actions_sur_caisse(){
             return 0;
 
         }
-        else if(choix == "P")
-        {
+        else if(choix == "P"){
             return 1;
         }
-        else
-        {
+        else{
             cout << "Veuillez choisir \"C\" ou \"P\"" << endl;
             return 0;
         }
@@ -260,27 +247,21 @@ int jeu::actions_sur_caisse(){
 
 }
 
-void jeu::changer_caisses()
-{
-    for(int i=0; i<NB_CAISSES; i++)
-    {
-        if (this->caisses[i]->a_changer())
-        {
+void Jeu::changer_caisses(){
+    for(int i=0; i<NB_CAISSES; i++){
+        if (this->caisses[i]->a_changer()){
             this->caisses[i]->changer_caisse();
             this->credits -= PRIX_OUVERTURE_FERMETURE_CAISSE;
 
-            if(!this->caisses[i]->est_Ouverte())
-            {
+            if(!this->caisses[i]->est_Ouverte()){
                 this->clients_en_attente+=this->caisses[i]->sortir_tout_les_clients();
             }
-
             this->caisses[i]->reset_changement();
         }
     }
 }
 
-bool jeu::hypermarche_est_vide()
-{
+bool Jeu::hypermarche_est_vide(){
     if(this->clients_courses>0)
         return false;
 
@@ -290,7 +271,6 @@ bool jeu::hypermarche_est_vide()
     for(int i; i<NB_CAISSES; i++)
         if (this->caisses[i]->get_clients_en_caisse()>0)
             return false;
-        
-    
+
     return true;
 }

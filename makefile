@@ -1,13 +1,16 @@
 all: JeuHypermarche
 
-JeuHypermarche: main.o caisse.o jeu.o
-	g++ -o JeuHypermarche main.o caisse.o jeu.o
+JeuHypermarche: main.o Caisse.o Jeu.o Score.o
+	g++ -o JeuHypermarche main.o Caisse.o Jeu.o Score.o
 
-jeu.o: jeu.cpp jeu.hpp
-	g++ -c jeu.cpp
+Jeu.o: Jeu.cpp Jeu.hpp
+	g++ -c Jeu.cpp
 
-caisse.o: caisse.cpp caisse.hpp
-	g++ -c caisse.cpp
+Caisse.o: Caisse.cpp Caisse.hpp
+	g++ -c Caisse.cpp
 
 main.o: main.cpp
 	g++ -c main.cpp
+
+Score.co: Score.cpp Score.hpp
+	g++ -c Score.cpp

@@ -2,14 +2,13 @@
 #include <string>
 #include <vector>
 
-#include "caisse.hpp"
+#include "Caisse.hpp"
 
 using namespace std;
 
 #define NB_CAISSES 10
 
-class jeu
-{
+class Jeu{
 private:
 
     int credits;
@@ -19,16 +18,15 @@ private:
     uint16_t clients_en_attente;
     uint16_t nombre_tours_joues;
     
-    caisse *caisses[NB_CAISSES];
+    Caisse *caisses[NB_CAISSES];
     char changements_caisse[NB_CAISSES];
 
     vector<int> get_caisses_ouvertes();
     string formater_changement(char c);
 
-
 public:
 
-    jeu();
+    Jeu();
 
     bool getHypermarcheVide();
     void setHypermarcheVide(bool state);

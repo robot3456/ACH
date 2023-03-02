@@ -1,4 +1,4 @@
-#include "caisse.hpp"
+#include "Caisse.hpp"
 #include <cstdint>
 #include <iostream>
 #include <string>
@@ -9,17 +9,17 @@
 
 using namespace std;
 
-caisse::caisse(){
+Caisse::Caisse(){
     this->clients_en_caisse=CLIENT_EN_CAISSE_DEBUT;
     this->ouverte=false;
     this->etat_a_changer=false;
 }
 
-void caisse::sortir_client(){
+void Caisse::sortir_client(){
     this->clients_en_caisse--;
 }
 
-string caisse::affiche_info(){   
+string Caisse::affiche_info(){   
     if(!this->ouverte){
         return "Fermée";
     }
@@ -49,40 +49,40 @@ string caisse::affiche_info(){
     }
 }
 
-bool caisse::est_Ouverte(){
+bool Caisse::est_Ouverte(){
     return ouverte;
 }
 
-void caisse::add_client_en_caisse(){
+void Caisse::add_client_en_caisse(){
     this->clients_en_caisse++;
 }
 
-void caisse::ouvrir_caisse(){
+void Caisse::ouvrir_caisse(){
     this->ouverte=true;
 }
 
-void caisse::fermer_caisse(){
+void Caisse::fermer_caisse(){
     this->ouverte=false;
 }
 
-int caisse::get_clients_en_caisse(){
+int Caisse::get_clients_en_caisse(){
     return this->clients_en_caisse;
 }
 
-void caisse::reset_clients_en_caisse(){
+void Caisse::reset_clients_en_caisse(){
     this->clients_en_caisse=0;
 }
 
 
-void caisse::changer_etat(){
+void Caisse::changer_etat(){
     this->etat_a_changer=!this->etat_a_changer;
 }
 
-void caisse::reset_changement(){
+void Caisse::reset_changement(){
     this->etat_a_changer=false;
 }
 
-string caisse::get_changement(){
+string Caisse::get_changement(){
     if(this->etat_a_changer==false){
         // Affiche un tiret Jaune
         return "[\033[1;33m-\033[0m]";
@@ -97,18 +97,15 @@ string caisse::get_changement(){
     }
 }
 
-bool caisse::a_changer()
-{
+bool Caisse::a_changer(){
     return this->etat_a_changer;
 }
 
-void caisse::changer_caisse()
-{
+void Caisse::changer_caisse(){
     this->ouverte = !this->ouverte;
 }
 
-int caisse::sortir_tout_les_clients()
-{
+int Caisse::sortir_tout_les_clients(){
     uint16_t clients_sortis = this->clients_en_caisse;
     this->clients_en_caisse=0;
     return clients_sortis;

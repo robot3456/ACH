@@ -3,8 +3,7 @@
 
 using namespace std;
 
-class caisse
-{
+class Caisse{
 private:
     uint16_t clients_en_caisse;
     bool ouverte;
@@ -12,7 +11,7 @@ private:
     
 public:
 
-    caisse();
+    Caisse();
 
     string affiche_info();
 
@@ -34,6 +33,5 @@ public:
     void reset_changement();
     bool a_changer();
     string get_changement();
-
 
 };
