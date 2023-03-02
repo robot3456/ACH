@@ -12,7 +12,7 @@ class jeu
 {
 private:
 
-    uint16_t credits;
+    int credits;
     bool hypermarche_vide;
     
     uint16_t clients_courses;

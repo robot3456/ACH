@@ -24,10 +24,12 @@ int main(){
         while (!Jeu.getHypermarcheVide() || Jeu.getCredits()<0 ){
 
             int continuer=-1;
+            
+            Jeu.sortir_clients_des_caisses();
+            Jeu.clients_vers_caisse();
 
             do
             {   
-                Jeu.clients_vers_caisse();
                 Jeu.affiche_etats_caisses();
                 Jeu.affiche_budget();
                 Jeu.affiche_position_clients();
@@ -37,9 +39,9 @@ int main(){
 
             }while(!continuer);
 
+            Jeu.changer_caisses();
             Jeu.facturation();            
 
-            Jeu.changer_caisses();
             
         }
 

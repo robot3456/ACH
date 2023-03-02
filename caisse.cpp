@@ -4,7 +4,7 @@
 
 #define CLIENT_EN_CAISSE_DEBUT 0
 
-#define MAX_CLIENTS_A_AFFICHER 10
+#define MAX_CLIENTS_A_AFFICHER 20
 
 using namespace std;
 
@@ -36,11 +36,16 @@ string caisse::affiche_info(){
             info.append("*");
         }
 
+        //info.append("*",MAX_CLIENTS_A_AFFICHER);
+
         if(this->clients_en_caisse==MAX_CLIENTS_A_AFFICHER){
             return info;
         }
 
-        info.append("(+%d)",this->clients_en_caisse-MAX_CLIENTS_A_AFFICHER);
+        info.append("(+");
+        info.append(to_string(this->clients_en_caisse-MAX_CLIENTS_A_AFFICHER));
+        info.append(")");
+
         return info;
     }
 }
@@ -74,7 +79,7 @@ void caisse::reset_changement(){
 }
 
 string caisse::get_changement(){
-    if(this->etat_a_changer==this->ouverte){
+    if(this->etat_a_changer==false){
         // Affiche un tiret Jaune
         return "[\033[1;33m-\033[0m]";
     }else{

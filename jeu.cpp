@@ -251,6 +251,7 @@ void jeu::changer_caisses()
         {
             this->caisses[i]->changer_caisse();
             this->credits -= PRIX_OUVERTURE_FERMETURE_CAISSE;
+            this->caisses[i]->reset_changement();
         }
     }
 }
