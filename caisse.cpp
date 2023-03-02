@@ -1,4 +1,5 @@
 #include "caisse.hpp"
+#include <cstdint>
 #include <iostream>
 #include <string>
 
@@ -99,4 +100,11 @@ bool caisse::a_changer()
 void caisse::changer_caisse()
 {
     this->ouverte = !this->ouverte;
+}
+
+int caisse::sortir_tout_les_clients()
+{
+    uint16_t clients_sortis = this->clients_en_caisse;
+    this->clients_en_caisse=0;
+    return clients_sortis;
 }

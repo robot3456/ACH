@@ -25,16 +25,8 @@ int main(){
 
             int continuer=-1;
             
-            cout << "HERE 1" << endl;
-
             Jeu.sortir_clients_des_caisses();
-
-            cout << "HERE 2" << endl;
-
             Jeu.clients_vers_caisse();
-
-            cout << "HERE 3" << endl;
-
             do
             {   
                 Jeu.affiche_etats_caisses();

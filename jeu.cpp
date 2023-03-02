@@ -61,7 +61,6 @@ int jeu::clients_vers_caisse(){
 
     //on décide combien de clients vont aller en caisse
 
-    cout << "HERE 4" << endl;
 
     std::srand(time(NULL));
     
@@ -72,16 +71,12 @@ int jeu::clients_vers_caisse(){
         }
     }
     
-    cout << "HERE 5" << endl;
-
     vector<int> caisse_ouvertes = this->get_caisses_ouvertes();
 
     int nb_caisse_ouvertes = caisse_ouvertes.size();
 
     cout << "nb caisses ouvertes : " << nb_caisse_ouvertes << endl;
 
-
-    cout << "HERE 6" << endl;
     if(nb_caisse_ouvertes>0)
     {
 
@@ -257,6 +252,12 @@ void jeu::changer_caisses()
         {
             this->caisses[i]->changer_caisse();
             this->credits -= PRIX_OUVERTURE_FERMETURE_CAISSE;
+
+            if(!this->caisses[i]->est_Ouverte())
+            {
+                this->clients_en_attente+=this->caisses[i]->sortir_tout_les_clients();
+            }
+
             this->caisses[i]->reset_changement();
         }
     }

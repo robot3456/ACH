@@ -14,13 +14,13 @@ public:
 
     caisse();
 
-    void sortir_client();
-
     string affiche_info();
 
     bool est_Ouverte();
 
+    void sortir_client();
     void add_client_en_caisse();
+    int sortir_tout_les_clients();
 
     void ouvrir_caisse();
     void fermer_caisse();
