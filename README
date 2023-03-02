@@ -17,3 +17,5 @@ TODO:
 [] Mettre tout en camel case
 [] Enlever les accolades s'il y a un if d'une seule ligne
 [] Enlever les include qui servent à rien
+[] Bouton pour changer l'etat de / pour ouvrir toutes les caisses
+[] ATTENTIONm: Score::CreateFileIfExists() efface le fichier d'avant ! il faut le changer

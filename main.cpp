@@ -16,9 +16,12 @@ using namespace std;
 int main(){
 
     Jeu jeu;
+    Score score;
     string restart="o";
 
     cout << START_MESSAGE;
+
+    score.createFileIfNotExists();
 
     while ( restart=="o"){
 
@@ -63,6 +66,8 @@ int main(){
             jeu.reset();
         }
     
+
+
     }
 
     cout << "\n\
