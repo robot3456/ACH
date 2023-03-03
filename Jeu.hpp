@@ -21,6 +21,17 @@ private:
     Caisse *caisses[NB_CAISSES];
     char changements_caisse[NB_CAISSES];
 
+    struct struct_devis{
+
+        int ouverture_fermeture_de_caisse;
+        int clients_en_attente;
+        int caisse_ouverte;
+        int clients_en_caisse;
+
+    };
+
+    struct_devis *devis;
+
     vector<int> get_caisses_ouvertes();
     string formater_changement(char c);
 
@@ -51,4 +62,8 @@ public:
 
     int actions_sur_caisse();
     void changer_caisses();
+
+    void reset_devis();
+
+    void affiche_devis();
 };

@@ -33,6 +33,8 @@ Jeu::Jeu(){
     this->hypermarche_vide=false;
     this->nombre_tours_joues=0;
 
+    this->devis = new struct_devis;
+
     for(int i=0; i<NB_CAISSES; i++){
         this->caisses[i] = new Caisse();
         this->changements_caisse[i] = '-';
@@ -72,20 +74,26 @@ void Jeu::reset(){
 
 int Jeu::clients_vers_caisse(){
 
-    if(clients_courses==0){ return 0; }  //on fait rien si pas de clients qui font des course
-    if(clients_courses<0){ return -1; }  //erreur si nombre de clients négatif
+    if(clients_courses==0)
+        return 0;  //on fait rien si pas de clients qui font des course
+    if(clients_courses<0)
+        return -1;  //erreur si nombre de clients négatif
 
     //on décide combien de clients vont aller en caisse
 
 
     std::srand(time(NULL));
     
+    int client_a_enlever = 0;
+
     for(int i=0; i<this->clients_courses; i++){ //on itère sur tout les clients
         if(std::rand()%2){ //1 chance sur 2 d'aller en caisse, =0 ou 1, si 1 on le met à placer
-            this->clients_courses--;
+            client_a_enlever++;
             this->clients_en_attente++;
         }
     }
+
+    this->clients_courses -= client_a_enlever;
     
     vector<int> caisse_ouvertes = this->get_caisses_ouvertes();
 
@@ -273,4 +281,47 @@ bool Jeu::hypermarche_est_vide(){
             return false;
 
     return true;
+}
+
+void Jeu::reset_devis(){
+    this->devis->clients_en_caisse=0;
+    this->devis->caisse_ouverte=0;
+    this->devis->clients_en_attente=0;
+    this->devis->ouverture_fermeture_de_caisse=0;
+}
+
+void Jeu::affiche_devis(){
+
+ 
+    cout << "---------------------------------------------------------" << endl;
+    
+    cout << "|\t\t\t\t\t\tPrix\t|" << endl;
+    
+    cout << "|\t\t\t\t\t\t\t|" << endl;
+
+    cout << "| ouverture/fermetures de caisses :\t" \
+    << this->devis->ouverture_fermeture_de_caisse \
+    << " x " << PRIX_OUVERTURE_FERMETURE_CAISSE << " = " \
+    << this->devis->ouverture_fermeture_de_caisse*PRIX_OUVERTURE_FERMETURE_CAISSE << "\t|" << endl;
+
+    cout << "| caisse(s) ouverte(s) : \t\t" \
+    << this->devis->caisse_ouverte \
+    << " x " << PRIX_PAR_CAISSE_OUVERTE << " = " \
+    << this->devis->caisse_ouverte*PRIX_PAR_CAISSE_OUVERTE << "\t|" << endl;
+
+    cout << "| clients en attente :\t\t\t" \
+    << this->devis->clients_en_attente \
+    << " x " << PRIX_PAR_CLIENT_EN_ATTENTE << " = " \
+    << this->devis->clients_en_attente*PRIX_PAR_CLIENT_EN_ATTENTE << "\t|" << endl;
+
+    cout << "| clients en caisse :\t\t\t" \
+    << this->devis->clients_en_caisse \
+    << " x " << PRIX_PAR_CLIENT_EN_CAISSE << " = " \
+    << this->devis->clients_en_caisse*PRIX_PAR_CLIENT_EN_CAISSE << "\t|" << endl;
+
+    cout << "| Tour\t\t\t\t\t\t1\t|" << endl;
+
+    cout << "|\t\t\t\t\t\t\t|" << endl;
+
+    cout << "---------------------------------------------------------" << endl;
 }

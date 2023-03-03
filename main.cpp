@@ -45,6 +45,10 @@ int main(){
             jeu.changer_caisses();
             jeu.facturation();
 
+            jeu.affiche_devis();
+
+            cout << endl;
+
         }
 
         if(jeu.getHypermarcheVide()){
