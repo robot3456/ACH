@@ -3,14 +3,21 @@
 #include <iostream>
 #include <fstream>
 
-#define SCORE_FILE "Scoreboard.txt"
 
 using namespace std;
 
 Score::Score(){
+    string nomJoueur;
     int score=0;
-    fstream scoreFile;
 }
+
+void Score::getNomJoueur(){
+    cout << "Votre nom est: " << this->nomJoueur <<endl;
+}
+void Score::setNomJoueur(string nomJoueur){
+    this->nomJoueur = nomJoueur ;
+}
+
 
 int Score::getScore(){
     return this->score;
@@ -23,40 +30,17 @@ void Score::setScore(int newScore){
 
 
 bool Score::fileExists(string filename) {
-  ifstream file(SCORE_FILE);
+  ifstream file(filename);
   return file.good();
 }
 
 
-// void Score::createFile(){
-
-//     this->scoreFile.open(SCORE_FILE, ios::out);
-
-//     if(this->scoreFile.is_open()){
-//         cout << "Le fichier contenant les scores a correctement ete cree !" << endl;
-//         this->scoreFile << "bonjour tout le monde";
-//         this->scoreFile.close();
-//     }
-//     else {
-//         cerr << "ATTENTION ! Le fichier n'a pas ete correctement cree, il y a eu un probleme"  << endl ;
-//     }
-// }
-
-
 void Score::createFileIfNotExists(string filename){
-    if(this->fileExists(filename)){
-        cout << "file exists. Nothing to do here." <<endl;
-    }
-    else if(!this->fileExists(filename)){
-        
-        cout << "file does not exists. Creating new one" << endl ;
-
+    
+    if(!this->fileExists(filename)){
+        cout << "Le fichier " << filename << " n'existe pas. Création du fichier ..." << endl ;
         ofstream scoreFile ;
-        scoreFile.open(filename) ;
-        
-        scoreFile <<"SCORE\t\t NOM\n";
-        scoreFile << "----------------------------\n";
-        
+        scoreFile.open(filename) ;  
         scoreFile.close();
     }
 }
@@ -65,43 +49,28 @@ void Score::createFileIfNotExists(string filename){
 void Score::writeScoreToFile(string filename){
     this->createFileIfNotExists(filename);
     ofstream scoreFile;
+    scoreFile.open(filename, ios_base::app);
+    scoreFile << this->nomJoueur << " " << this->score << endl;
 }
 
-string Score::readScoreFromFile(string filename){
+void Score::readScoreFromFile(string filename){
+    
+    this->createFileIfNotExists(filename);
+
     ifstream scoreFile;
-    string results="";
-    return results;
+    string nomJoueur;
+    int scoreJoueur;
+
+    scoreFile.open(filename);
+
+    cout <<"\n\tNOM\t\t\t SCORE" << endl;
+    cout << "\t------------------------------------" << endl;
+
+    while ( scoreFile >> nomJoueur >> scoreJoueur){
+        cout << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << endl ;
+    }
+
+    cout << "\t------------------------------------\n" << endl;
+    scoreFile.close();
 }
 
-// void Score::createFileIfNotExists(){
-
-//     this->scoreFile.open(SCORE_FILE);
-
-//     if (this->scoreFile) {
-
-//         // use existing file
-//         cout<< "success "<< SCORE_FILE <<" found. \n";
-//         cout<<"\nAppending writing and working with existing file"<<"\n---\n";
-
-//         //this->scoreFile.open(SCORE_FILE, fstream::app | fstream::out | fstream::in);
-
-
-//         //this->scoreFile << "Appending writing and working with existing file"<<"\n---\n";
-//         this->scoreFile << "Appending";
-//         this->scoreFile.close();
-//         cout<<"\n";
-//     } 
-
-//     // If file does not exist, Create new file
-//     else{
-
-//         cout << "Cannot open file, file does not exist. Creating new file..";
-
-//         this->scoreFile.open(SCORE_FILE,  fstream::in | fstream::out | fstream::trunc);
-//         this->scoreFile <<"SCORE\t\t NOM\n";
-//         this->scoreFile << "----------------------------\n";
-//         this->scoreFile.close();
-//         cout<<"\n"<<endl;
-
-//     }
-// }

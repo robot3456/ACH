@@ -6,6 +6,7 @@
 
 using namespace std;
 
+#define SCORE_FILE "Scoreboard.txt"
 #define START_MESSAGE "\n\
 \t------------------------------------\n \
 \t| Bienvenue aux commandes de votre |\n \
@@ -15,15 +16,16 @@ using namespace std;
 
 int main(){
 
+    string nomJoueur;
+
     Jeu jeu;
     Score score;
     string restart="o";
 
     cout << START_MESSAGE;
 
-    //cout << score.fileExists("Scoreboard.txt") << endl ;
-    score.createFileIfNotExists("Scoreboard.txt");
-    
+
+    score.readScoreFromFile(SCORE_FILE) ;
 
 
     while ( restart=="o"){
@@ -47,7 +49,6 @@ int main(){
 
             jeu.changer_caisses();
             jeu.facturation();
-
             jeu.affiche_devis();
 
             cout << endl;
@@ -61,20 +62,26 @@ int main(){
             cout << "PERDU" << endl;
         }
         cout << "Votre score est :" << jeu.getCredits() << " credits" << endl ;
+        
+        score.setScore(jeu.getCredits());
 
 
+        // score
+        cout << "Quel est votre nom ?: " << endl ;
+        getline(cin, nomJoueur);
+        score.setNomJoueur(nomJoueur);
+        score.getNomJoueur();
+        score.writeScoreToFile(SCORE_FILE);
+        score.readScoreFromFile(SCORE_FILE);
 
-
-
-        cout << "Voulez vous recommencer ? o[oui]/n[non]" << endl;
+        
+        //demander restart
+        cout << "Voulez vous recommencer ? o[oui]/n[non] :" ;
         getline(cin, restart);
 
         if (restart=="o"){
             jeu.reset();
         }
-    
-
-
     }
 
     cout << "\n\
