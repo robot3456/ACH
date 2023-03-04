@@ -171,24 +171,23 @@ vector<int> Jeu::get_caisses_ouvertes(){
     return caisse_ouvertes;
 }
 
+
 void Jeu::facturation(){
 
-    //Facturation des caisses ouvertes
     vector<int> caisse_ouvertes = get_caisses_ouvertes();
-
     uint16_t nb_caisses_ouvertes = caisse_ouvertes.size();
     
+    this->devis->caisse_ouverte=nb_caisses_ouvertes;
+    this->devis->clients_en_attente=this->clients_en_attente;
+    
     this->credits -= caisse_ouvertes.size()*PRIX_PAR_CAISSE_OUVERTE;
-
-    //Facturation des clients en attente de caisse
     this->credits -= this->clients_en_attente*PRIX_PAR_CLIENT_EN_ATTENTE;
 
-    //Facturation des clients en caisse
     for(int num_caisse : caisse_ouvertes){
+        this->devis->clients_en_caisse+=this->caisses[num_caisse]->get_clients_en_caisse();
         this->credits -= caisses[num_caisse]->get_clients_en_caisse()*PRIX_PAR_CLIENT_EN_CAISSE;
     }
 
-    //Facturation du tour du jeu
     this->credits -= PRIX_TOUR_DE_JEU;
 }
 
@@ -298,6 +297,7 @@ void Jeu::changer_caisses(){
         if (this->caisses[i]->a_changer()){
             this->caisses[i]->changer_caisse();
             this->credits -= PRIX_OUVERTURE_FERMETURE_CAISSE;
+            this->devis->ouverture_fermeture_de_caisse++;
 
             if(!this->caisses[i]->est_Ouverte()){
                 this->clients_en_attente+=this->caisses[i]->sortir_tout_les_clients();
@@ -335,36 +335,46 @@ void Jeu::reset_devis(){
 
 void Jeu::affiche_devis(){
 
- 
-    cout << "---------------------------------------------------------" << endl;
+    int totalOuvertureFermeture = this->devis->ouverture_fermeture_de_caisse*PRIX_OUVERTURE_FERMETURE_CAISSE;
+    int totalCaisseOuverte = this->devis->caisse_ouverte*PRIX_PAR_CAISSE_OUVERTE;
+    int totalClientsEnAttente = this->devis->clients_en_attente*PRIX_PAR_CLIENT_EN_ATTENTE;
+    int totalClientsEnCaisse = this->devis->clients_en_caisse*PRIX_PAR_CLIENT_EN_CAISSE;
+
+    int total = 1+totalOuvertureFermeture+totalCaisseOuverte+totalClientsEnAttente+totalClientsEnCaisse;
+
+    cout << "-----------------------------------------------------------------" << endl;
     
-    cout << "|\t\t\t\t\t\tPrix\t|" << endl;
+    cout << "|\t\t\t\t\t\t\tPrix\t|" << endl;
     
-    cout << "|\t\t\t\t\t\t\t|" << endl;
+    cout << "|\t\t\t\t\t\t\t\t|" << endl;
 
     cout << "| ouverture/fermetures de caisses :\t" \
     << this->devis->ouverture_fermeture_de_caisse \
-    << " x " << PRIX_OUVERTURE_FERMETURE_CAISSE << " = " \
-    << this->devis->ouverture_fermeture_de_caisse*PRIX_OUVERTURE_FERMETURE_CAISSE << "\t|" << endl;
+    << "  x  " << PRIX_OUVERTURE_FERMETURE_CAISSE << "cr\t= " \
+    << totalOuvertureFermeture << "cr\t|" << endl;
 
     cout << "| caisse(s) ouverte(s) : \t\t" \
     << this->devis->caisse_ouverte \
-    << " x " << PRIX_PAR_CAISSE_OUVERTE << " = " \
-    << this->devis->caisse_ouverte*PRIX_PAR_CAISSE_OUVERTE << "\t|" << endl;
+    << "  x  " << PRIX_PAR_CAISSE_OUVERTE << "cr\t= " \
+    << totalCaisseOuverte << "cr\t|" << endl;
 
     cout << "| clients en attente :\t\t\t" \
     << this->devis->clients_en_attente \
-    << " x " << PRIX_PAR_CLIENT_EN_ATTENTE << " = " \
-    << this->devis->clients_en_attente*PRIX_PAR_CLIENT_EN_ATTENTE << "\t|" << endl;
+    << "  x  " << PRIX_PAR_CLIENT_EN_ATTENTE << "cr\t= " \
+    << totalClientsEnAttente << "cr\t|" << endl;
 
     cout << "| clients en caisse :\t\t\t" \
     << this->devis->clients_en_caisse \
-    << " x " << PRIX_PAR_CLIENT_EN_CAISSE << " = " \
-    << this->devis->clients_en_caisse*PRIX_PAR_CLIENT_EN_CAISSE << "\t|" << endl;
+    << "  x  " << PRIX_PAR_CLIENT_EN_CAISSE << "cr\t= " \
+    << totalClientsEnCaisse << "cr\t|" << endl;
 
-    cout << "| Tour\t\t\t\t\t\t1\t|" << endl;
+    cout << "| Tour:\t\t\t\t\t\t\t  1cr\t|" << endl;
 
-    cout << "|\t\t\t\t\t\t\t|" << endl;
+    cout << "|\t------------------------------------------------\t|" << endl;
 
-    cout << "---------------------------------------------------------" << endl;
+    cout << "| Total:\t\t\t\t\t\t  " << total << "cr\t|" << endl;
+
+    cout << "|\t\t\t\t\t\t\t\t|" << endl;
+
+    cout << "-----------------------------------------------------------------" << endl;
 }

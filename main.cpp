@@ -49,8 +49,10 @@ int main(){
             }while(!continuer);
 
             jeu.changer_caisses();
+            
             jeu.facturation();
             jeu.affiche_devis();
+            jeu.reset_devis();
 
             cout << endl;
 

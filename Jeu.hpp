@@ -58,6 +58,10 @@ public:
     void ouvrir_caisse(int n);
     void fermer_caisse(int n);
 
+    /**
+     * @brief Créer le devis et facture le joueur pour le tour actuel
+     * 
+     */
     void facturation();
 
     void affiche_etats_caisses();
@@ -69,6 +73,10 @@ public:
 
     void reset_devis();
 
+    /**
+     * @brief Affich le devis du tour actuel avec les prix à payer
+     * 
+     */
     void affiche_devis();
 
     int mettreClientsEnAttente();
