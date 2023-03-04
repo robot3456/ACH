@@ -40,4 +40,4 @@ public:
 };
 
 
-#endif CAISSE_HPP
+#endif // CAISSE_HPP

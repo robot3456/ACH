@@ -36,4 +36,4 @@ public:
 };
 
 
-#endif SCORE_HPP
+#endif // SCORE_HPP

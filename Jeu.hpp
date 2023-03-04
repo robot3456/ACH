@@ -76,4 +76,4 @@ public:
 };
 
 
-#endif JEU_HPP
+#endif // JEU_HPP
