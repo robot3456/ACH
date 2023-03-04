@@ -21,10 +21,10 @@ void Caisse::sortir_client(){
 
 string Caisse::affiche_info(){   
     if(!this->ouverte){
-        return "Fermée";
+        return "[\033[1;31mFermée\033[0m]";
     }
 
-    string info = "Ouverte | Clients :";
+    string info = "[\033[1;32mOuverte\033[0m] | Clients :";
 
     if(this->clients_en_caisse <= MAX_CLIENTS_A_AFFICHER){
         for(int i=0; i<this->clients_en_caisse; i++){

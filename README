@@ -6,7 +6,7 @@ TODO:
 [x] Afficher le score à la fin
 [x] Enregistrer les scores dans un fichier (faire classe, methodes)
 [] Changer les étoiles 
-[] Mettre les couleurs sur Fermée/ouvertes
+[x] Mettre les couleurs sur Fermée/ouvertes
 [] Clients sortent même après qu'on a plus de crédits (peut être pas important)
 [] Changer le saisie des actions
 [] Changer les noms des classes et les {}
@@ -18,6 +18,6 @@ TODO:
 [] Enlever les accolades s'il y a un if d'une seule ligne
 [] Enlever les include qui servent à rien
 [] Bouton pour changer l'etat de / pour ouvrir toutes les caisses
-[] ATTENTION: Score::CreateFileIfExists() efface le fichier d'avant ! il faut le changer
-[] Demander nom a l'utilisateur pour le stocker dans le tableau des scores
+[x] ATTENTION: Score::CreateFileIfExists() efface le fichier d'avant ! il faut le changer
+[x] Demander nom a l'utilisateur pour le stocker dans le tableau des scores
 [] Erreur dans scorefile qd le nom du joueur est la touche <entrée> 
