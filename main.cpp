@@ -67,13 +67,12 @@ int main(){
 
 
         // score
-        cout << "Quel est votre nom ?: " << endl ;
+        cout << "Quel est votre nom ?: " ;
         getline(cin, nomJoueur);
         score.setNomJoueur(nomJoueur);
         score.getNomJoueur();
         score.writeScoreToFile(SCORE_FILE);
         score.readScoreFromFile(SCORE_FILE);
-
         
         //demander restart
         cout << "Voulez vous recommencer ? o[oui]/n[non] :" ;

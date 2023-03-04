@@ -3,8 +3,8 @@ par Qassim-Tayab MANSOOR et Kacper KUPIS
 
 TODO: 
 [] Faire un devis des budgets à la fin tour (crédits consommé par quoi)
-[] Afficher le score à la fin
-[] Enregistrer les scores dans un fichier (faire classe, methodes
+[x] Afficher le score à la fin
+[x] Enregistrer les scores dans un fichier (faire classe, methodes)
 [] Changer les étoiles 
 [] Mettre les couleurs sur Fermée/ouvertes
 [] Clients sortent même après qu'on a plus de crédits (peut être pas important)
@@ -20,4 +20,4 @@ TODO:
 [] Bouton pour changer l'etat de / pour ouvrir toutes les caisses
 [] ATTENTION: Score::CreateFileIfExists() efface le fichier d'avant ! il faut le changer
 [] Demander nom a l'utilisateur pour le stocker dans le tableau des scores
-
+[] Erreur dans scorefile qd le nom du joueur est la touche <entrée> 

@@ -7,13 +7,14 @@
 using namespace std;
 
 Score::Score(){
-    string nomJoueur;
-    int score=0;
+    this->nomJoueur="";
+    this->score=0;
 }
 
 void Score::getNomJoueur(){
     cout << "Votre nom est: " << this->nomJoueur <<endl;
 }
+
 void Score::setNomJoueur(string nomJoueur){
     this->nomJoueur = nomJoueur ;
 }
@@ -51,6 +52,7 @@ void Score::writeScoreToFile(string filename){
     ofstream scoreFile;
     scoreFile.open(filename, ios_base::app);
     scoreFile << this->nomJoueur << " " << this->score << endl;
+    scoreFile.close();
 }
 
 void Score::readScoreFromFile(string filename){
@@ -63,14 +65,16 @@ void Score::readScoreFromFile(string filename){
 
     scoreFile.open(filename);
 
-    cout <<"\n\tNOM\t\t\t SCORE" << endl;
-    cout << "\t------------------------------------" << endl;
+    cout << "\n\t--------- TABEAU DES SCORES ---------" << endl;
+    cout << "\t-------------------------------------" << endl;
+    cout <<"\tNOM\t\t\t SCORE" << endl;
+    cout << "\t-------------------------------------" << endl;
 
     while ( scoreFile >> nomJoueur >> scoreJoueur){
         cout << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << endl ;
     }
 
-    cout << "\t------------------------------------\n" << endl;
+    cout << "\t-------------------------------------\n" << endl;
     scoreFile.close();
 }
 
