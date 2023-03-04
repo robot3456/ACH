@@ -21,7 +21,10 @@ int main(){
 
     cout << START_MESSAGE;
 
-    score.createFileIfNotExists();
+    //cout << score.fileExists("Scoreboard.txt") << endl ;
+    score.createFileIfNotExists("Scoreboard.txt");
+    
+
 
     while ( restart=="o"){
 

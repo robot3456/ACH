@@ -18,4 +18,6 @@ TODO:
 [] Enlever les accolades s'il y a un if d'une seule ligne
 [] Enlever les include qui servent à rien
 [] Bouton pour changer l'etat de / pour ouvrir toutes les caisses
-[] ATTENTIONm: Score::CreateFileIfExists() efface le fichier d'avant ! il faut le changer
+[] ATTENTION: Score::CreateFileIfExists() efface le fichier d'avant ! il faut le changer
+[] Demander nom a l'utilisateur pour le stocker dans le tableau des scores
+
