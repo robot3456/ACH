@@ -1,3 +1,8 @@
+#ifndef SCORE_HPP
+#define SCORE_HPP
+
+
+
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -14,7 +19,7 @@ public:
 
     Score();
 
-    void getNomJoueur();
+    string getNomJoueur();
     void setNomJoueur(string nomJoueur);
 
     int getScore();
@@ -28,4 +33,9 @@ public:
     void writeScoreToFile(string filename);
     void readScoreFromFile(string filename);
 
+    void TrieEtInsereScoreDansFichierTxt(string filename);
+
 };
+
+
+#endif // SCORE_HPP

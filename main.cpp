@@ -72,9 +72,11 @@ int main(){
         cout << "Quel est votre nom ?: " ;
         getline(cin, nomJoueur);
         score.setNomJoueur(nomJoueur);
-        score.getNomJoueur();
-        score.writeScoreToFile(SCORE_FILE);
+        cout << score.getNomJoueur() << endl ;
+        //score.writeScoreToFile(SCORE_FILE);
+        score.TrieEtInsereScoreDansFichierTxt(SCORE_FILE);
         score.readScoreFromFile(SCORE_FILE);
+
         
         //demander restart
         cout << "Voulez vous recommencer ? o[oui]/n[non] :" ;
@@ -83,6 +85,9 @@ int main(){
         if (restart=="o"){
             jeu.reset();
         }
+
+        // delete &score;
+        // delete &jeu;
     }
 
     cout << "\n\

@@ -1,3 +1,6 @@
+#ifndef CAISSE_HPP
+#define CAISSE_HPP
+
 #include <stdint.h>
 #include <string>
 
@@ -35,3 +38,6 @@ public:
     string get_changement();
 
 };
+
+
+#endif // CAISSE_HPP

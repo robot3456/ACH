@@ -1,3 +1,7 @@
+#ifndef JEU_HPP
+#define JEU_HPP
+
+
 #include <stdint.h>
 #include <string>
 #include <vector>
@@ -70,3 +74,6 @@ public:
     int mettreClientsEnAttente();
     int metttreClientsEnCaisses();
 };
+
+
+#endif // JEU_HPP
