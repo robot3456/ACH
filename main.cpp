@@ -21,6 +21,7 @@ int main(){
     Jeu jeu;
     Score score;
     string restart="o";
+    int tour=1;
 
     cout << START_MESSAGE;
 
@@ -29,6 +30,8 @@ int main(){
 
 
     while ( restart=="o"){
+
+        int tour=1;
 
         while (!jeu.hypermarche_est_vide() && (jeu.getCredits()>0)){
 
@@ -39,6 +42,9 @@ int main(){
             jeu.metttreClientsEnCaisses();
 
             do{   
+                
+                cout << "TOUR N°" << tour <<endl;
+
                 jeu.affiche_etats_caisses();
                 jeu.affiche_budget();
                 jeu.affiche_position_clients();
@@ -56,15 +62,16 @@ int main(){
 
             cout << endl;
 
+            tour++;
         }
 
-        if(jeu.getHypermarcheVide())
-        {
+        if(jeu.getHypermarcheVide()){
             cout << "Bien joué! Vous avez gagné!" << endl;
         }else{
             cout << "Dommage. Vous avez perdu..." << endl;
         }
 
+        cout << "Vous avez joue " << tour << " tours" << endl;
         cout << "Votre score est :" << jeu.getCredits() << " credits" << endl ;
         
         score.setScore(jeu.getCredits());
