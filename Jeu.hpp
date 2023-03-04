@@ -66,4 +66,7 @@ public:
     void reset_devis();
 
     void affiche_devis();
+
+    int mettreClientsEnAttente();
+    int metttreClientsEnCaisses();
 };

@@ -35,7 +35,8 @@ int main(){
             int continuer=-1;
 
             jeu.sortir_clients_des_caisses();
-            jeu.clients_vers_caisse();
+            jeu.mettreClientsEnAttente();
+            jeu.metttreClientsEnCaisses();
             
             do{   
                 jeu.affiche_etats_caisses();

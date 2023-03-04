@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <cstdlib>
 #include <exception>
 #include <stdlib.h>
 #include <time.h>
@@ -14,7 +15,7 @@
 using namespace std;
 
 #define STARTING_CREDITS 1000
-#define STARTING_CLIENTS_EN_COURSE 100
+#define STARTING_CLIENTS_EN_COURSE 10
 #define STARTING_CLIENTS_EN_ATTENTE 0
 
 #define PRIX_PAR_CAISSE_OUVERTE 3
@@ -71,46 +72,83 @@ void Jeu::reset(){
 }
 
 
+/*  
+*   Fonction qui met un nombre aléatoir de clients en attente
+*   Renvoie:
+*       le nombre de clients qui sont mis en attente
+*       -1, Erreur il y a un nombre négatif de clients en coursr -> Impossible
+*/
+int Jeu::mettreClientsEnAttente()
+{
+    /*On renvoie 0 direct si aucun clients ne fait les courses*/
+    if (this->clients_courses==0)
+        return 0;
 
-int Jeu::clients_vers_caisse(){
+    /*On renvoie -1 s'il y a un nombre de clients en course négatif*/
+    if (this->clients_courses<0)
+        return -1;
 
-    if(clients_courses==0)
-        return 0;  //on fait rien si pas de clients qui font des course
-    if(clients_courses<0)
-        return -1;  //erreur si nombre de clients négatif
-
-    //on décide combien de clients vont aller en caisse
-
-
+    /*Initialisation de rand*/
     std::srand(time(NULL));
-    
-    int client_a_enlever = 0;
 
-    for(int i=0; i<this->clients_courses; i++){ //on itère sur tout les clients
-        if(std::rand()%2){ //1 chance sur 2 d'aller en caisse, =0 ou 1, si 1 on le met à placer
-            client_a_enlever++;
+    /*Variable qui va compter le nombre de clients en course en moins*/
+    int clientsEnMoins = 0;
+
+    /*
+    On itère sur tout les clients en course, on a une chance de 1/2 pour que le clients
+    passe en attente
+    */
+    for(int i=0; i<this->clients_courses; i++){
+        if(std::rand()%2){
+            clientsEnMoins++;
             this->clients_en_attente++;
         }
     }
 
-    this->clients_courses -= client_a_enlever;
-    
-    vector<int> caisse_ouvertes = this->get_caisses_ouvertes();
+    this->clients_courses-=clientsEnMoins;
+    return clientsEnMoins;
+}
 
-    int nb_caisse_ouvertes = caisse_ouvertes.size();
 
-    cout << "nb caisses ouvertes : " << nb_caisse_ouvertes << endl;
+/*
+*   Fonction qui envoie les clients en attente dans des caisses ouvertes
+*   Renvoie:
+*       0,  si aucun clients n'a été envoyé en caisse
+*       1,  si les clients en attente on été envoyé en caisse
+*       -1, s'il y a eu un problème
+*/
+int Jeu::metttreClientsEnCaisses()
+{
+    /*On renvoie 0 s'il y a aucun clients en attente*/
+    if (this->clients_en_attente==0)
+        return 0;
 
-    if(nb_caisse_ouvertes>0){
+    /*On initialise une liste des caisses ouvertes, ainsi que le nombre de caisses ouvertes*/
+    vector<int> caisseOuvertes = this->get_caisses_ouvertes();
+    int nbCaissesOuvertes = caisseOuvertes.size();
 
-        for(int i=0; i<this->clients_en_attente; i++){
+    /*On renvoie 0 s'il y a aucune caisse ouverte*/
+    if (nbCaissesOuvertes==0)
+        return 0;
 
-            int rand_caisse_ouverte = caisse_ouvertes[rand()%nb_caisse_ouvertes];
+    /*On initialise une variable pour choisir une caisse ouverte aléatoire*/
+    int caisseOuverteAleatoire;
 
-            this->caisses[rand_caisse_ouverte]->add_client_en_caisse();
-            this->clients_en_attente--;
-        }
+    /*On itère sur tout les clients en attente, */
+    for(int i=0; i<this->clients_en_attente; i++){
+
+        /*On choisit une caisse ouverte aléatoire*/
+        caisseOuverteAleatoire = caisseOuvertes[rand()%nbCaissesOuvertes];
+
+        /*On ajoute le client à la caisse aléatoire choisi*/
+        this->caisses[caisseOuverteAleatoire]->add_client_en_caisse();
     }
+
+    /*
+    Tout les clients en attente on été placé, on remet le nombre de clients en attente à 0
+    et on renvoie 1.
+    */
+    this->clients_en_attente=0;
     return 1;
 }
 
@@ -270,15 +308,22 @@ void Jeu::changer_caisses(){
 }
 
 bool Jeu::hypermarche_est_vide(){
+
+    //cout << "~~~~Clients en course : " << this->clients_courses << endl;
     if(this->clients_courses>0)
         return false;
 
+    //cout << "~~~~Clients en attente : " << this->clients_en_attente << endl;
     if(this->clients_en_attente>0)
         return false;
 
-    for(int i; i<NB_CAISSES; i++)
+    
+    for(int i; i<NB_CAISSES; i++){
+        //cout << "~~~~Clients en caisse " << i << " : " << this->caisses[i]->get_clients_en_caisse() << endl;
         if (this->caisses[i]->get_clients_en_caisse()>0)
             return false;
+    }
+        
 
     return true;
 }
