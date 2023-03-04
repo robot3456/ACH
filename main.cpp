@@ -30,14 +30,14 @@ int main(){
 
     while ( restart=="o"){
 
-        while (!jeu.hypermarche_est_vide() && jeu.getCredits()>0 ){
+        while (!jeu.hypermarche_est_vide() && (jeu.getCredits()>0)){
 
             int continuer=-1;
 
             jeu.sortir_clients_des_caisses();
             jeu.mettreClientsEnAttente();
             jeu.metttreClientsEnCaisses();
-            
+
             do{   
                 jeu.affiche_etats_caisses();
                 jeu.affiche_budget();
@@ -56,12 +56,13 @@ int main(){
 
         }
 
-        if(jeu.getHypermarcheVide()){
-            cout << "GAGNE" << endl;
+        if(jeu.getHypermarcheVide())
+        {
+            cout << "Bien joué! Vous avez gagné!" << endl;
+        }else{
+            cout << "Dommage. Vous avez perdu..." << endl;
         }
-        else{
-            cout << "PERDU" << endl;
-        }
+
         cout << "Votre score est :" << jeu.getCredits() << " credits" << endl ;
         
         score.setScore(jeu.getCredits());

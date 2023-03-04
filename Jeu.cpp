@@ -309,22 +309,20 @@ void Jeu::changer_caisses(){
 
 bool Jeu::hypermarche_est_vide(){
 
-    //cout << "~~~~Clients en course : " << this->clients_courses << endl;
     if(this->clients_courses>0)
         return false;
 
-    //cout << "~~~~Clients en attente : " << this->clients_en_attente << endl;
     if(this->clients_en_attente>0)
         return false;
 
     
-    for(int i; i<NB_CAISSES; i++){
-        //cout << "~~~~Clients en caisse " << i << " : " << this->caisses[i]->get_clients_en_caisse() << endl;
-        if (this->caisses[i]->get_clients_en_caisse()>0)
+    for(int i=0; i<NB_CAISSES; i++){
+        if (this->caisses[i]->get_clients_en_caisse()>0){
             return false;
+        }
     }
-        
 
+    this->hypermarche_vide = true;
     return true;
 }
 
