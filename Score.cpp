@@ -2,7 +2,9 @@
 
 #include <iostream>
 #include <fstream>
-
+#include <vector>
+#include <algorithm>
+#include <sstream>
 
 using namespace std;
 
@@ -11,8 +13,9 @@ Score::Score(){
     this->score=0;
 }
 
-void Score::getNomJoueur(){
-    cout << "Votre nom est: " << this->nomJoueur <<endl;
+string Score::getNomJoueur(){
+    // cout << "Votre nom est: " << this->nomJoueur <<endl;
+    return this->nomJoueur;
 }
 
 void Score::setNomJoueur(string nomJoueur){
@@ -67,14 +70,55 @@ void Score::readScoreFromFile(string filename){
 
     cout << "\n\t--------- TABEAU DES SCORES ---------" << endl;
     cout << "\t-------------------------------------" << endl;
-    cout <<"\tNOM\t\t\t SCORE" << endl;
+    cout <<"\tRANG\tNOM\t\t\tSCORE" << endl;
     cout << "\t-------------------------------------" << endl;
 
-    while ( scoreFile >> nomJoueur >> scoreJoueur){
-        cout << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << endl ;
+    // while ( scoreFile >> nomJoueur >> scoreJoueur){
+    //     cout << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << endl ;
+    // }
+    int i=0;
+    while ( scoreFile >> nomJoueur >> scoreJoueur && i<10){
+        cout << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << endl ;
+        i++;
     }
 
     cout << "\t-------------------------------------\n" << endl;
     scoreFile.close();
 }
+
+void Score::TrieEtInsereScoreDansFichierTxt(string filename){
+    
+    ifstream scoreFile(filename);
+    string line;
+    vector<Score> scoresTousLesJoueurs;
+    
+    while (getline(scoreFile, line)) {
+        std::stringstream ss(line);
+        string nomJoueur;
+        int scoreJoueur;
+        ss >> nomJoueur >> scoreJoueur;
+        Score scoreJoueurFichierTxt;
+        scoreJoueurFichierTxt.setNomJoueur(nomJoueur);
+        scoreJoueurFichierTxt.setScore(scoreJoueur);
+        scoresTousLesJoueurs.push_back(scoreJoueurFichierTxt);
+    }
+    scoreFile.close();
+
+    Score scoreCourant;
+    scoreCourant.setNomJoueur(this->getNomJoueur());
+    scoreCourant.setScore(this->getScore());
+
+    scoresTousLesJoueurs.push_back(scoreCourant);
+
+    sort(scoresTousLesJoueurs.begin(), scoresTousLesJoueurs.end(), [](Score s1, Score s2) { return s1.getScore() > s2.getScore(); });
+
+    ofstream scoreFileOut(filename);
+    for (Score s : scoresTousLesJoueurs) {
+        scoreFileOut << s.getNomJoueur() << " " << s.getScore() << endl;
+    }
+    scoreFileOut.close();
+}
+
+
+
 

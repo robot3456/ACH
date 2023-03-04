@@ -19,7 +19,7 @@ public:
 
     Score();
 
-    void getNomJoueur();
+    string getNomJoueur();
     void setNomJoueur(string nomJoueur);
 
     int getScore();
@@ -32,6 +32,8 @@ public:
 
     void writeScoreToFile(string filename);
     void readScoreFromFile(string filename);
+
+    void TrieEtInsereScoreDansFichierTxt(string filename);
 
 };
 
