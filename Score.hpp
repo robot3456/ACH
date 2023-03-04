@@ -1,3 +1,8 @@
+#ifndef SCORE_HPP
+#define SCORE_HPP
+
+
+
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -29,3 +34,6 @@ public:
     void readScoreFromFile(string filename);
 
 };
+
+
+#endif SCORE_HPP
