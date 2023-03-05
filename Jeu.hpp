@@ -68,7 +68,7 @@ public:
     void afficheBudget();
     void affichePositionClients(); 
 
-    int actionsSurCaisse();
+    bool actionsSurCaisses();
     void changerCaisses();
 
     void resetDevis();
