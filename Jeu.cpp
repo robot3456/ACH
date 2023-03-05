@@ -51,12 +51,13 @@ void Jeu::setHypermarcheVide(bool newState){
     this->hypermarche_vide = newState;
 }
 
-
-// Duplicata de la fonction affiche_budget()
+/* Retourne le nombre de credits */
 int Jeu::getCredits(){
     return this->credits;
 }
 
+/* Réinitialise les valeurs à celles au départ 
+afin de pouvoir recommencer une nouvelle partie */
 void Jeu::reset(){
 
     this->credits=STARTING_CREDITS;
