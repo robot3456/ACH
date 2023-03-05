@@ -10,24 +10,24 @@
 using namespace std;
 
 Caisse::Caisse(){
-    this->clients_en_caisse=CLIENT_EN_CAISSE_DEBUT;
+    this->clientsEnCaisse=CLIENT_EN_CAISSE_DEBUT;
     this->ouverte=false;
-    this->etat_a_changer=false;
+    this->etatAChanger=false;
 }
 
-void Caisse::sortir_client(){
-    this->clients_en_caisse--;
+void Caisse::sortirClient(){
+    this->clientsEnCaisse--;
 }
 
-string Caisse::affiche_info(){   
+string Caisse::afficheInfoCaisse(){   
     if(!this->ouverte){
         return "[\033[1;31mFermée\033[0m]";
     }
 
     string info = "[\033[1;32mOuverte\033[0m] | Clients :";
 
-    if(this->clients_en_caisse <= MAX_CLIENTS_A_AFFICHER){
-        for(int i=0; i<this->clients_en_caisse; i++){
+    if(this->clientsEnCaisse <= MAX_CLIENTS_A_AFFICHER){
+        for(int i=0; i<this->clientsEnCaisse; i++){
             info.append("*");
         }
         return info;
@@ -37,53 +37,53 @@ string Caisse::affiche_info(){
             info.append("*");
         }
 
-        if(this->clients_en_caisse==MAX_CLIENTS_A_AFFICHER){
+        if(this->clientsEnCaisse==MAX_CLIENTS_A_AFFICHER){
             return info;
         }
 
         info.append("(+");
-        info.append(to_string(this->clients_en_caisse-MAX_CLIENTS_A_AFFICHER));
+        info.append(to_string(this->clientsEnCaisse-MAX_CLIENTS_A_AFFICHER));
         info.append(")");
 
         return info;
     }
 }
 
-bool Caisse::est_Ouverte(){
+bool Caisse::estOuverte(){
     return ouverte;
 }
 
-void Caisse::add_client_en_caisse(){
-    this->clients_en_caisse++;
+void Caisse::ajouterClientEnCaisse(){
+    this->clientsEnCaisse++;
 }
 
-void Caisse::ouvrir_caisse(){
+void Caisse::ouvrirCaisse(){
     this->ouverte=true;
 }
 
-void Caisse::fermer_caisse(){
+void Caisse::fermerCaisse(){
     this->ouverte=false;
 }
 
-int Caisse::get_clients_en_caisse(){
-    return this->clients_en_caisse;
+int Caisse::getClientsEnCaisse(){
+    return this->clientsEnCaisse;
 }
 
-void Caisse::reset_clients_en_caisse(){
-    this->clients_en_caisse=0;
+void Caisse::resetClientsEnCaisse(){
+    this->clientsEnCaisse=0;
 }
 
 
-void Caisse::changer_etat(){
-    this->etat_a_changer=!this->etat_a_changer;
+void Caisse::changerEtat(){
+    this->etatAChanger=!this->etatAChanger;
 }
 
-void Caisse::reset_changement(){
-    this->etat_a_changer=false;
+void Caisse::resetChangement(){
+    this->etatAChanger=false;
 }
 
-string Caisse::get_changement(){
-    if(this->etat_a_changer==false){
+string Caisse::getChangement(){
+    if(this->etatAChanger==false){
         // Affiche un tiret Jaune
         return "[\033[1;33m-\033[0m]";
     }else{
@@ -97,16 +97,16 @@ string Caisse::get_changement(){
     }
 }
 
-bool Caisse::a_changer(){
-    return this->etat_a_changer;
+bool Caisse::aChanger(){
+    return this->etatAChanger;
 }
 
-void Caisse::changer_caisse(){
+void Caisse::changerCaisse(){
     this->ouverte = !this->ouverte;
 }
 
-int Caisse::sortir_tout_les_clients(){
-    uint16_t clients_sortis = this->clients_en_caisse;
-    this->clients_en_caisse=0;
-    return clients_sortis;
+int Caisse::sortirTousLesClients(){
+    uint16_t clientsSortis = this->clientsEnCaisse;
+    this->clientsEnCaisse=0;
+    return clientsSortis;
 }

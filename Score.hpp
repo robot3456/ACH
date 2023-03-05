@@ -25,13 +25,13 @@ public:
     int getScore();
     void setScore(int newScore);
 
-    bool fileExists(string filename);
+    bool fichierExiste(string filename);
 
-    void createFile(string filename);
-    void createFileIfNotExists(string filename);
+    void creerFichier(string filename);
+    void creerFichierSiNExistePas(string filename);
 
-    void writeScoreToFile(string filename);
-    void readScoreFromFile(string filename);
+    void ecrireScoreDansFichierTxt(string filename);
+    void lireScoreDepuisFichierTxt(string filename);
 
     void TrieEtInsereScoreDansFichierTxt(string filename);
 

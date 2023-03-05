@@ -8,34 +8,34 @@ using namespace std;
 
 class Caisse{
 private:
-    uint16_t clients_en_caisse;
+    uint16_t clientsEnCaisse;
     bool ouverte;
-    bool etat_a_changer;
+    bool etatAChanger;
     
 public:
 
     Caisse();
 
-    string affiche_info();
+    string afficheInfoCaisse();
 
-    bool est_Ouverte();
+    bool estOuverte();
 
-    void sortir_client();
-    void add_client_en_caisse();
-    int sortir_tout_les_clients();
+    void sortirClient();
+    void ajouterClientEnCaisse();
+    int sortirTousLesClients();
 
-    void ouvrir_caisse();
-    void fermer_caisse();
-    void changer_caisse();
+    void ouvrirCaisse();
+    void fermerCaisse();
+    void changerCaisse();
 
     // Getter
-    int get_clients_en_caisse();
-    void reset_clients_en_caisse();
+    int getClientsEnCaisse();
+    void resetClientsEnCaisse();
 
-    void changer_etat();
-    void reset_changement();
-    bool a_changer();
-    string get_changement();
+    void changerEtat();
+    void resetChangement();
+    bool aChanger();
+    string getChangement();
 
 };
 

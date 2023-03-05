@@ -21,44 +21,43 @@ int main(){
     Jeu jeu;
     Score score;
     string restart="o";
-    int tour=1;
 
     cout << START_MESSAGE;
 
 
-    score.readScoreFromFile(SCORE_FILE) ;
+    score.lireScoreDepuisFichierTxt(SCORE_FILE) ;
 
 
     while ( restart=="o"){
 
         int tour=1;
 
-        while (!jeu.hypermarche_est_vide() && (jeu.getCredits()>0)){
+        while (!jeu.hypermarcheEstVide() && (jeu.getCredits()>0)){
 
             int continuer=-1;
-
-            jeu.sortir_clients_des_caisses();
-            jeu.mettreClientsEnAttente();
-            jeu.metttreClientsEnCaisses();
 
             do{   
                 
                 cout << "TOUR N°" << tour <<endl;
 
-                jeu.affiche_etats_caisses();
-                jeu.affiche_budget();
-                jeu.affiche_position_clients();
+                jeu.afficheEtatsCaisses();
+                jeu.afficheBudget();
+                jeu.affichePositionClients();
 
-                continuer = jeu.actions_sur_caisse();
+                continuer = jeu.actionsSurCaisse();
                 cout << "\n\n\n\n\n\n" << endl;
 
             }while(!continuer);
 
-            jeu.changer_caisses();
+            jeu.changerCaisses();
             
             jeu.facturation();
-            jeu.affiche_devis();
-            jeu.reset_devis();
+            jeu.afficheDevis();
+            jeu.resetDevis();
+
+            jeu.sortirClientsDesCaisses();
+            jeu.mettreClientsEnAttente();
+            jeu.metttreClientsEnCaisses();
 
             cout << endl;
 
@@ -71,7 +70,7 @@ int main(){
             cout << "Dommage. Vous avez perdu..." << endl;
         }
 
-        cout << "Vous avez joue " << tour << " tours" << endl;
+        cout << "Vous avez joue " << tour-1 << " tours" << endl;
         cout << "Votre score est :" << jeu.getCredits() << " credits" << endl ;
         
         score.setScore(jeu.getCredits());
@@ -84,7 +83,7 @@ int main(){
         cout << score.getNomJoueur() << endl ;
         //score.writeScoreToFile(SCORE_FILE);
         score.TrieEtInsereScoreDansFichierTxt(SCORE_FILE);
-        score.readScoreFromFile(SCORE_FILE);
+        score.lireScoreDepuisFichierTxt(SCORE_FILE);
 
         
         //demander restart

@@ -42,7 +42,7 @@ void Score::setScore(int newScore){
 * retourne true si il existe, false sinon 
 * @param: nom du fichier dont on veut vérifier l'existence
 */
-bool Score::fileExists(string filename) {
+bool Score::fichierExiste(string filename) {
   ifstream file(filename);
   return file.good();
 }
@@ -50,9 +50,9 @@ bool Score::fileExists(string filename) {
 /* Crée un fichier <filename> si il n'existe pas 
 * @param: nom du fichier à créer
 */
-void Score::createFileIfNotExists(string filename){
+void Score::creerFichierSiNExistePas(string filename){
     
-    if(!this->fileExists(filename)){
+    if(!this->fichierExiste(filename)){
         cout << "Le fichier " << filename << " n'existe pas. Création du fichier ..." << endl ;
         ofstream scoreFile ;
         scoreFile.open(filename) ;  
@@ -63,8 +63,8 @@ void Score::createFileIfNotExists(string filename){
 /* Ecrit le score contenu dans la variable score de l'instance en cours
 * @param: nom du fichier dans lequel le score doit être écrit 
 */
-void Score::writeScoreToFile(string filename){
-    this->createFileIfNotExists(filename);
+void Score::ecrireScoreDansFichierTxt(string filename){
+    this->creerFichierSiNExistePas(filename);
     ofstream scoreFile;
     scoreFile.open(filename, ios_base::app);
     scoreFile << this->nomJoueur << " " << this->score << endl;
@@ -76,9 +76,9 @@ void Score::writeScoreToFile(string filename){
 * Si ce tableau contient plus de 10 lignes, il affichera les 10 meilleurs scores des joueurs
 * Si il contient moins de 10 valeurs alors il les affichera toutes 
 * @param: nom du fichier dans lequel sont inscrits les scores */
-void Score::readScoreFromFile(string filename){
+void Score::lireScoreDepuisFichierTxt(string filename){
     
-    this->createFileIfNotExists(filename);
+    this->creerFichierSiNExistePas(filename);
 
     ifstream scoreFile;
     string nomJoueur;

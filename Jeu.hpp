@@ -16,28 +16,28 @@ class Jeu{
 private:
 
     int credits;
-    bool hypermarche_vide;
+    bool hypermarcheVide;
     
-    uint16_t clients_courses;
-    uint16_t clients_en_attente;
-    uint16_t nombre_tours_joues;
+    uint16_t clientsEnCourses;
+    uint16_t clientsEnAttente;
+    uint16_t nombreToursJoues;
     
     Caisse *caisses[NB_CAISSES];
-    char changements_caisse[NB_CAISSES];
+    char changementsCaisse[NB_CAISSES];
 
     struct struct_devis{
 
-        int ouverture_fermeture_de_caisse;
-        int clients_en_attente;
-        int caisse_ouverte;
-        int clients_en_caisse;
+        int ouvertureFermetureDeCaisse;
+        int clientsEnAttente;
+        int caisseOuverte;
+        int clientsEnCaisse;
 
     };
 
     struct_devis *devis;
 
-    vector<int> get_caisses_ouvertes();
-    string formater_changement(char c);
+    vector<int> getCaissesOuvertes();
+    string formaterChangement(char c);
 
 public:
 
@@ -46,17 +46,17 @@ public:
     bool getHypermarcheVide();
     void setHypermarcheVide(bool state);
 
-    bool hypermarche_est_vide();
+    bool hypermarcheEstVide();
 
     int getCredits();
 
     void reset();
 
-    int clients_vers_caisse();
-    void sortir_clients_des_caisses();
+    int clientsVersCaisse();
+    void sortirClientsDesCaisses();
 
-    void ouvrir_caisse(int n);
-    void fermer_caisse(int n);
+    void ouvrirCaisse(int n);
+    void fermerCaisse(int n);
 
     /**
      * @brief Créer le devis et facture le joueur pour le tour actuel
@@ -64,20 +64,20 @@ public:
      */
     void facturation();
 
-    void affiche_etats_caisses();
-    void affiche_budget();
-    void affiche_position_clients(); 
+    void afficheEtatsCaisses();
+    void afficheBudget();
+    void affichePositionClients(); 
 
-    int actions_sur_caisse();
-    void changer_caisses();
+    int actionsSurCaisse();
+    void changerCaisses();
 
-    void reset_devis();
+    void resetDevis();
 
     /**
      * @brief Affich le devis du tour actuel avec les prix à payer
      * 
      */
-    void affiche_devis();
+    void afficheDevis();
 
     int mettreClientsEnAttente();
     int metttreClientsEnCaisses();
