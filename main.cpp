@@ -34,7 +34,7 @@ int main(){
 
         while (!jeu.hypermarcheEstVide() && (jeu.getCredits()>0)){
 
-            int continuer=-1;
+            bool continuer=false;
 
             do{   
                 
@@ -44,7 +44,7 @@ int main(){
                 jeu.afficheBudget();
                 jeu.affichePositionClients();
 
-                continuer = jeu.actionsSurCaisse();
+                continuer = jeu.actionsSurCaisses();
                 cout << "\n\n\n\n\n\n" << endl;
 
             }while(!continuer);

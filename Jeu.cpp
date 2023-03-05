@@ -229,67 +229,49 @@ void Jeu::affichePositionClients(){
     cout << "Clients dans l'hypermarché: " << this->clientsEnCourses << ", en attente de caisse: " << this->clientsEnAttente << " et aux caisses: " << clientsEnCaisses << ".\n";
 }
 
-int Jeu::actionsSurCaisse(){
+bool Jeu::actionsSurCaisses(){
 
     string choix;
 
-    while(true){
-
-        cout << endl;
-        cout << "Action sur les caisses ..." << endl;
-        cout << "Choisir une caisse à changer[C], Passer et appliquer tout les changements[P] :";
-        getline(cin, choix);
-        
-        if (!choix.empty() && choix[choix.length()-1] == '\n'){
-            choix.erase(choix.length()-1);
-        }
-
-        if(cin.fail()){
-            cout << "Erreur dans la saisie du choix, veuillez réessayer." << endl;
-            cin.clear();
-            continue;
-        }
-
-        if(choix.length()>=2){
-            cout << "Veuillez rentrez une seule lettre." << endl;
-            cin.clear();
-            continue;
-        }
-        
-        for(auto & c: choix) c = toupper(c);
-
-        if(choix == "C"){
-            int choixNumCaisse=0;
-            string str_choix_num_caisse;
-
-            while(true){
-                cout << "Veuillez choisir la caisse à ouvrir/fermer[1-10] : ";
-                getline(cin, str_choix_num_caisse);
-                
-                try{
-                    choixNumCaisse=stoi(str_choix_num_caisse);
-                    if(choixNumCaisse<=NB_CAISSES && choixNumCaisse>=0){
-                        cout << "choix numéro de caisse: " << choixNumCaisse << endl;
-                        break;
-                    }
-                    cout << "Veuillez entrer un nombre entre 0 et 10" << endl;
-                }catch (exception &err){
-                    cout << "Veuillez entrer un nombre." << endl;
-                }
-            }
-            this->caisses[choixNumCaisse-1]->changerEtat();
-            return 0;
-
-        }
-        else if(choix == "P"){
-            return 1;
-        }
-        else{
-            cout << "Veuillez choisir \"C\" ou \"P\"" << endl;
-            return 0;
-        }
-
+    cout << endl;
+    cout << "Action sur les caisses ..." << endl;
+    cout << "Choisir une caisse à changer[1-10], Passer et appliquer tout les changements[P] :";
+    getline(cin, choix);
+    
+    //On efface le caractère \n de la chaine pour avoir que le choix de l'utilisateur
+    if (!choix.empty() && choix[choix.length()-1] == '\n'){
+        choix.erase(choix.length()-1);
     }
+
+    //On vérifie que la saisie a été faite correctement
+    if(cin.fail()){
+        cout << "Erreur dans la saisie du choix, veuillez réessayer." << endl;
+        cin.clear();
+        return false;
+    }
+
+    //On met la chaine de caractère en majuscule pour pouvoir entrer "p" ou "P"
+    for(auto & c: choix) c = toupper(c);
+
+
+    if(choix=="P")
+        return true;
+
+    try{
+        
+        int choixNumCaisse = stoi(choix);
+        if(choixNumCaisse<=NB_CAISSES && choixNumCaisse>=1){
+            this->caisses[choixNumCaisse-1]->changerEtat();
+            return false;
+        }
+
+    }catch(exception &err){
+        cout << "Erreur de saisie veuillez recommencer" << endl;
+        return false;
+    }
+
+    cout << "Veuillez selectionner \"[1-10\" ou \'P\'" << endl;
+    return false;
 
 }
 
