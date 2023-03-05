@@ -15,6 +15,11 @@ Score::Score(){
     this->score=0;
 }
 
+void Score::reset(){
+    this->nomJoueur="";
+    this->score=0;
+}
+
 /* Getter du nom du joueur en cours */
 string Score::getNomJoueur(){
     // cout << "Votre nom est: " << this->nomJoueur <<endl;
@@ -52,7 +57,7 @@ bool Score::fichierExiste(string filename) {
 */
 void Score::creerFichierSiNExistePas(string filename){
     
-    if(!this->fichierExiste(filename)){
+    if(!fichierExiste(filename)){
         cout << "Le fichier " << filename << " n'existe pas. Création du fichier ..." << endl ;
         ofstream scoreFile ;
         scoreFile.open(filename) ;  
@@ -63,22 +68,22 @@ void Score::creerFichierSiNExistePas(string filename){
 /* Ecrit le score contenu dans la variable score de l'instance en cours
 * @param: nom du fichier dans lequel le score doit être écrit 
 */
-void Score::ecrireScoreDansFichierTxt(string filename){
-    this->creerFichierSiNExistePas(filename);
-    ofstream scoreFile;
-    scoreFile.open(filename, ios_base::app);
-    scoreFile << this->nomJoueur << " " << this->score << endl;
-    scoreFile.close();
-}
+// void Score::ecrireScoreDansFichierTxt(string filename){
+//     this->creerFichierSiNExistePas(filename);
+//     ofstream scoreFile;
+//     scoreFile.open(filename, ios_base::app);
+//     scoreFile << this->nomJoueur << " " << this->score << endl;
+//     scoreFile.close();
+// }
 
 /* Lit le fichier contenant les scores et affiche 
 * le résultat dans un tableau
 * Si ce tableau contient plus de 10 lignes, il affichera les 10 meilleurs scores des joueurs
 * Si il contient moins de 10 valeurs alors il les affichera toutes 
 * @param: nom du fichier dans lequel sont inscrits les scores */
-void Score::lireScoreDepuisFichierTxt(string filename){
+void Score::afficherScoresDepuisFichierTxt(string filename){
     
-    this->creerFichierSiNExistePas(filename);
+    creerFichierSiNExistePas(filename);
 
     ifstream scoreFile;
     string nomJoueur;
@@ -94,7 +99,13 @@ void Score::lireScoreDepuisFichierTxt(string filename){
     // Afficher les 10 meilleurs scores ou afficher tous les scores si il y en a moins de 10 
     int i=0;
     while ( scoreFile >> nomJoueur >> scoreJoueur && i<10){
-        cout << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << endl ;
+
+        if ((nomJoueur == this->nomJoueur) && (scoreJoueur == this->score)){
+            cout << "\033[1;32m" << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << "\033[0m" << endl ;
+        }else{
+            cout << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << endl ;
+
+        }
         i++;
     }
 
@@ -106,8 +117,9 @@ void Score::lireScoreDepuisFichierTxt(string filename){
 /* Fonction récursive
 * Fonction qui Trie et insère les joueurs dans un fichier texte par ordre décroissant du score
 * @param: nom du fichier dans lequel sont stockés les scores
+* PS : s'il vous plait Monsieur, mettez nous des points en plus, on a vraiment beaucoup travailé pour ce projet
 */
-void Score::TrieEtInsereScoreDansFichierTxt(string filename){
+void Score::ajouterNomsEtScoresDansVecteur(string filename, vector<Score>& scoresTousLesJoueurs){
     
     // Ouvrir le fichier en lecture
     ifstream scoreFile(filename);
@@ -116,7 +128,6 @@ void Score::TrieEtInsereScoreDansFichierTxt(string filename){
     string line;
 
     // Vecteur qui servira à contenir le nom et le score des joueurs par ordre décroissant du score
-    vector<Score> scoresTousLesJoueurs;
     
     // Lire les joueurs du fichier et les stocker dans un vecteur
     while (getline(scoreFile, line)) {
@@ -130,7 +141,9 @@ void Score::TrieEtInsereScoreDansFichierTxt(string filename){
         scoresTousLesJoueurs.push_back(scoreJoueurFichierTxt);
     }
     scoreFile.close();
+}
 
+void Score::ajouterNomEtScoreJoueurActuel(vector<Score>& scoresTousLesJoueurs){
     // Créer une instance de Score contenant le nom et le score du joueur actuel
     Score scoreCourant;
     scoreCourant.setNomJoueur(this->getNomJoueur());
@@ -139,10 +152,15 @@ void Score::TrieEtInsereScoreDansFichierTxt(string filename){
     /* Ajouter les valeurs dans <scoreCourant> dans le vecteur 
      <scoresTousLesJoueurs> les uns à la suite des autres */
     scoresTousLesJoueurs.push_back(scoreCourant);
+}
+
+void Score::trierScoresParOrdreDecroissant(vector<Score>& scoresTousLesJoueurs){
 
     // Trier les joueurs par ordre décroissant du score
     sort(scoresTousLesJoueurs.begin(), scoresTousLesJoueurs.end(), [](Score s1, Score s2) { return s1.getScore() > s2.getScore(); });
+}
 
+void Score::ecrireJoueursDansFichierTxt(string filename, vector<Score> scoresTousLesJoueurs){
     // Ouvrir le fichier en écriture et ajouter les joueurs triés au fichier
     ofstream scoreFileOut(filename);
     for (Score s : scoresTousLesJoueurs) {
@@ -150,6 +168,35 @@ void Score::TrieEtInsereScoreDansFichierTxt(string filename){
     }
     scoreFileOut.close();
 }
+
+
+
+void Score::mettreAJourScoreboard(string filename){
+    
+    vector<Score> scoresTousLesJoueurs;
+
+    ajouterNomsEtScoresDansVecteur(filename, scoresTousLesJoueurs);
+
+    ajouterNomEtScoreJoueurActuel(scoresTousLesJoueurs);
+
+    trierScoresParOrdreDecroissant(scoresTousLesJoueurs);
+
+    ecrireJoueursDansFichierTxt(filename, scoresTousLesJoueurs);
+
+    afficherScoresDepuisFichierTxt(filename);
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

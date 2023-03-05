@@ -25,7 +25,7 @@ int main(){
     cout << START_MESSAGE;
 
 
-    score.lireScoreDepuisFichierTxt(SCORE_FILE) ;
+    score.afficherScoresDepuisFichierTxt(SCORE_FILE) ;
 
 
     while ( restart=="o"){
@@ -76,14 +76,16 @@ int main(){
         score.setScore(jeu.getCredits());
 
 
-        // score
+        // // score
         cout << "Quel est votre nom ?: " ;
         getline(cin, nomJoueur);
         score.setNomJoueur(nomJoueur);
         cout << score.getNomJoueur() << endl ;
-        //score.writeScoreToFile(SCORE_FILE);
-        score.TrieEtInsereScoreDansFichierTxt(SCORE_FILE);
-        score.lireScoreDepuisFichierTxt(SCORE_FILE);
+        // score.TrieEtInsereScoreDansFichierTxt(SCORE_FILE);
+        // score.afficherScoresDepuisFichierTxt(SCORE_FILE);
+
+        // Score
+        score.mettreAJourScoreboard(SCORE_FILE);
 
         
         //demander restart
@@ -92,6 +94,7 @@ int main(){
 
         if (restart=="o"){
             jeu.reset();
+            score.reset();
         }
 
         // delete &score;

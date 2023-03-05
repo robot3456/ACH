@@ -2,22 +2,25 @@ Projet hypermarché en c++
 par Qassim-Tayab MANSOOR et Kacper KUPIS
 
 TODO: 
-[] Faire un devis des budgets à la fin tour (crédits consommé par quoi)
+[x] Faire un devis des budgets à la fin tour (crédits consommé par quoi)
 [x] Afficher le score à la fin
 [x] Enregistrer les scores dans un fichier (faire classe, methodes)
 [] Changer les étoiles 
 [x] Mettre les couleurs sur Fermée/ouvertes
-[] Clients sortent même après qu'on a plus de crédits (peut être pas important)
+[pas important] Clients sortent même après qu'on a plus de crédits (peut être pas important)
 [] Changer le saisie des actions
 [] Changer les noms des classes et les {}
 [] Ajouter une lettre pour annuler la saisie d'une caisse à ouvrir
 [] AJouter une fonction pour n'afficher que le tour actuelle (supprimer les trucs avant avec un clear(pas ouf) ou autre fonction)
 [] Regrouper les mêmes méthodes au même endroit dans le code (par ex tout les affiche au même endroite, etc...)
 [] Commenter le code 
-[] Mettre tout en camel case
+[x] Mettre tout en camel case
 [] Enlever les accolades s'il y a un if d'une seule ligne
 [] Enlever les include qui servent à rien
 [] Bouton pour changer l'etat de / pour ouvrir toutes les caisses
 [x] ATTENTION: Score::CreateFileIfExists() efface le fichier d'avant ! il faut le changer
 [x] Demander nom a l'utilisateur pour le stocker dans le tableau des scores
 [] Erreur dans scorefile qd le nom du joueur est la touche <entrée> 
+[] Devis ne se met pas à jour dans le do {} while
+
+

@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -19,6 +20,8 @@ public:
 
     Score();
 
+    void reset();
+
     string getNomJoueur();
     void setNomJoueur(string nomJoueur);
 
@@ -30,10 +33,17 @@ public:
     void creerFichier(string filename);
     void creerFichierSiNExistePas(string filename);
 
-    void ecrireScoreDansFichierTxt(string filename);
-    void lireScoreDepuisFichierTxt(string filename);
+    // void ecrireScoreDansFichierTxt(string filename);
+    void afficherScoresDepuisFichierTxt(string filename);
 
-    void TrieEtInsereScoreDansFichierTxt(string filename);
+    // ajout
+    void ajouterNomsEtScoresDansVecteur(string filename, vector<Score>& scoresTousLesJoueurs);
+    void ajouterNomEtScoreJoueurActuel(vector<Score>& scoresTousLesJoueurs);
+    void trierScoresParOrdreDecroissant(vector<Score>& scoresTousLesJoueurs);
+    void ecrireJoueursDansFichierTxt(string filename, vector<Score> scoresTousLesJoueurs);
+    void mettreAJourScoreboard(string filename);
+
+
 
 };
 
