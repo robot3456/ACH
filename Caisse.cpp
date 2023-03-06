@@ -5,83 +5,94 @@
 
 #define CLIENT_EN_CAISSE_DEBUT 0
 
-#define MAX_CLIENTS_A_AFFICHER 20
-
 using namespace std;
 
+/* Constructeur de l'objec caisse contenant les clients en une caisse
+* l'etat de la caisse : ouverte (true) / fermée (false)
+* et le flag etat_a_changer si il fuat changer l'etat de la caisse au prochain tour
+*/
 Caisse::Caisse(){
     this->clientsEnCaisse=CLIENT_EN_CAISSE_DEBUT;
     this->ouverte=false;
     this->etatAChanger=false;
 }
 
+/* Supprime un client de la caisse */
 void Caisse::sortirClient(){
     this->clientsEnCaisse--;
 }
 
-string Caisse::afficheInfoCaisse(){   
+/* Affichage graphique des clients en caisse représentés par des étoiles */
+string Caisse::afficheInfoCaisse(){
+
+    // retourne "Fermée" en couleur rouge si la caisse est fermée
     if(!this->ouverte){
         return "[\033[1;31mFermée\033[0m]";
     }
 
+    // "info" contient le texte "Ouverte" en couleur verte + "| Clients :" en couleur normale
     string info = "[\033[1;32mOuverte\033[0m] | Clients :";
 
-    if(this->clientsEnCaisse <= MAX_CLIENTS_A_AFFICHER){
-        for(int i=0; i<this->clientsEnCaisse; i++){
-            info.append("*");
-        }
-        return info;
-    }else{
-
-        for(int i=0; i<MAX_CLIENTS_A_AFFICHER; i++){
-            info.append("*");
-        }
-
-        if(this->clientsEnCaisse==MAX_CLIENTS_A_AFFICHER){
-            return info;
-        }
-
-        info.append("(+");
-        info.append(to_string(this->clientsEnCaisse-MAX_CLIENTS_A_AFFICHER));
-        info.append(")");
-
-        return info;
+    for(int i=0; i<this->clientsEnCaisse; i++){
+        info.append("*");
     }
+
+    info.append(" (");
+    info.append(to_string(this->clientsEnCaisse));
+    info.append(" clients)");
+
+    return info;
+
 }
 
+/* Fonction utilisée pour connaître l'état d'une caisse
+* retourne la valeur (true/false) contenue dans "ouverte" */
 bool Caisse::estOuverte(){
     return ouverte;
 }
 
+/* Ajoute un client en caisse */
 void Caisse::ajouterClientEnCaisse(){
     this->clientsEnCaisse++;
 }
 
+/* Fonction utilisée au moment d'ouvrir une caisse 
+* Change l'état de "ouverte" à true */
 void Caisse::ouvrirCaisse(){
     this->ouverte=true;
 }
 
+/* Fonction utilisée au moment d'ouvrir une caisse 
+* Change l'état de "ouverte" à false */
 void Caisse::fermerCaisse(){
     this->ouverte=false;
 }
 
+/* Retourne le nombre de clients contenus dans 1 caisse */
 int Caisse::getClientsEnCaisse(){
     return this->clientsEnCaisse;
 }
 
+/* Réinitialise le nombre de clients contenus dans 1 caisse à 0 */
 void Caisse::resetClientsEnCaisse(){
     this->clientsEnCaisse=0;
 }
 
-
+/* Inverse l'état de "etat_a_changer" afin de savoir si la caisse 
+* doit ouvrir ou fermer au prochain tour 
+*/
 void Caisse::changerEtat(){
     this->etatAChanger=!this->etatAChanger;
 }
 
+/* Réinitialise l'état de "etat_a_changer" à false (valeur par défaut)*/
 void Caisse::resetChangement(){
     this->etatAChanger=false;
 }
 
+/* Affiche sur le coté gauche du terminal et entre crochets,
+* les caisses dont l'état va changer au prochain tour
+*/
 string Caisse::getChangement(){
     if(this->etatAChanger==false){
         // Affiche un tiret Jaune
@@ -97,13 +108,15 @@ string Caisse::getChangement(){
     }
 }
 
+/* Retourne la valeur de "etat a changer" */
 bool Caisse::aChanger(){
     return this->etatAChanger;
 }
-
+/* Inverse l'état d'ouverture actuel de la caisse */
 void Caisse::changerCaisse(){
     this->ouverte = !this->ouverte;
 }
+
 
 int Caisse::sortirTousLesClients(){
     uint16_t clientsSortis = this->clientsEnCaisse;
