@@ -25,6 +25,8 @@ private:
     Caisse *caisses[NB_CAISSES];
     char changementsCaisse[NB_CAISSES];
 
+    string errorMessage;
+
     struct struct_devis{
 
         int ouvertureFermetureDeCaisse;

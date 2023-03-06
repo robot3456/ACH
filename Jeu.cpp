@@ -36,6 +36,8 @@ Jeu::Jeu(){
 
     this->devis = new struct_devis;
 
+    this->errorMessage="";
+
     for(int i=0; i<NB_CAISSES; i++){
         this->caisses[i] = new Caisse();
         this->changementsCaisse[i] = '-';
@@ -235,6 +237,7 @@ bool Jeu::actionsSurCaisses(){
 
     cout << endl;
     cout << "Action sur les caisses ..." << endl;
+    cout << this->errorMessage << endl;
     cout << "Choisir une caisse à changer[1-10], Passer et appliquer tout les changements[P] :";
     getline(cin, choix);
     
@@ -245,7 +248,7 @@ bool Jeu::actionsSurCaisses(){
 
     //On vérifie que la saisie a été faite correctement
     if(cin.fail()){
-        cout << "Erreur dans la saisie du choix, veuillez réessayer." << endl;
+        this->errorMessage= "\033[1;31mErreur dans la saisie du choix, veuillez réessayer.\033[0m";
         cin.clear();
         return false;
     }
@@ -253,24 +256,26 @@ bool Jeu::actionsSurCaisses(){
     //On met la chaine de caractère en majuscule pour pouvoir entrer "p" ou "P"
     for(auto & c: choix) c = toupper(c);
 
-
-    if(choix=="P")
+    if(choix=="P"){
+        this->errorMessage="";
         return true;
-
+    }
+        
     try{
         
         int choixNumCaisse = stoi(choix);
         if(choixNumCaisse<=NB_CAISSES && choixNumCaisse>=1){
             this->caisses[choixNumCaisse-1]->changerEtat();
+            this->errorMessage="";
             return false;
         }
 
     }catch(exception &err){
-        cout << "Erreur de saisie veuillez recommencer" << endl;
+        this->errorMessage= "\033[1;31mErreur dans la saisie du choix, veuillez réessayer.\033[0m";
         return false;
     }
 
-    cout << "Veuillez selectionner \"[1-10\" ou \'P\'" << endl;
+    this->errorMessage="\033[1;31mVeuillez selectionner \"[1-10\" ou \'P\'\033[0m";
     return false;
 
 }
