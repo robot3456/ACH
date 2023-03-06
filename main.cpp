@@ -30,7 +30,7 @@ int main(){
 
     while ( restart=="o"){
 
-        int tour=1;
+        jeu.setTour(1);
 
         while (!jeu.hypermarcheEstVide() && (jeu.getCredits()>0)){
 
@@ -40,7 +40,7 @@ int main(){
             // Demande à l'utilisateur le numéro de caisse à changer, tant que celui ci n'appuie pas sur "P"
             do{   
                 
-                cout << "TOUR N°" << tour << "\n" << endl;
+                cout << "TOUR N°" << jeu.getTour() << "\n" << endl;
 
                 jeu.afficheDevis();
 
@@ -63,7 +63,7 @@ int main(){
 
             cout << endl;
 
-            tour++;
+            jeu.setTour(jeu.getTour() + 1);
         }
 
         if(jeu.getHypermarcheVide()){
@@ -72,7 +72,7 @@ int main(){
             cout << "\033[1;31mDommage. Vous avez perdu...\033[0m" << endl;
         }
 
-        cout << "Vous avez joue " << tour-1 << " tours" << endl;
+        cout << "Vous avez joue " << jeu.getTour()-1 << " tours" << endl;
         cout << "Votre score est :" << jeu.getCredits() << " credits" << endl ;
         
         score.setScore(jeu.getCredits());

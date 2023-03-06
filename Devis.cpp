@@ -5,7 +5,7 @@ using namespace std;
 
 /* Constructeur de la class Devis contenant la fonction "resetDevis" */
 Devis::Devis(){
-    this->resetDevis();
+    resetDevis();
 }
 
 /* Réinitialise les valeurs des clients en caisse, 

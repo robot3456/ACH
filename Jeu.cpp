@@ -29,6 +29,7 @@ Jeu::Jeu(){
     this->clientsEnAttente=STARTING_CLIENTS_EN_ATTENTE;
 
     this->hypermarcheVide=false;
+    this->tour=1;
 
     this->devis.resetDevis();
 
@@ -47,6 +48,16 @@ bool Jeu::getHypermarcheVide(){
 
 void Jeu::setHypermarcheVide(bool newState){
     this->hypermarcheVide = newState;
+}
+
+/* Getter du tour actuel */
+int Jeu::getTour(){
+    return this->tour;
+}
+
+/* Setter pour changer la valeur du tour */
+void Jeu::setTour(int tourActuel){
+    this->tour=tourActuel;
 }
 
 /* Retourne le nombre de credits */

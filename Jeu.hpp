@@ -22,6 +22,7 @@ private:
 
     int credits;
     bool hypermarcheVide;
+    int tour;
     
     uint16_t clientsEnCourses;
     uint16_t clientsEnAttente;
@@ -42,6 +43,9 @@ public:
 
     bool getHypermarcheVide();
     void setHypermarcheVide(bool state);
+
+    int getTour();
+    void setTour(int tourActuel);
 
     bool hypermarcheEstVide();
 
