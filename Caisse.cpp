@@ -37,9 +37,9 @@ string Caisse::afficheInfoCaisse(){
         info.append("*");
     }
 
-    info.append(" (");
+    info.append(" \t(");
     info.append(to_string(this->clientsEnCaisse));
-    info.append(" clients)");
+    info.append(")");
 
     return info;
 

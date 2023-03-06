@@ -22,5 +22,5 @@ TODO:
 [x] Demander nom a l'utilisateur pour le stocker dans le tableau des scores
 [] Erreur dans scorefile qd le nom du joueur est la touche <entrée> 
 [] Devis ne se met pas à jour dans le do {} while
-
+[] CHANGER LE NOMBRE DE CLIENTS A 100 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

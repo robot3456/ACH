@@ -65,9 +65,9 @@ int main(){
         }
 
         if(jeu.getHypermarcheVide()){
-            cout << "Bien joué! Vous avez gagné!" << endl;
+            cout << "\033[1;32mBien joué! Vous avez gagné!\033[0m" << endl;
         }else{
-            cout << "Dommage. Vous avez perdu..." << endl;
+            cout << "\033[1;31mDommage. Vous avez perdu...\033[0m" << endl;
         }
 
         cout << "Vous avez joue " << tour-1 << " tours" << endl;
