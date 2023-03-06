@@ -14,16 +14,6 @@
 
 using namespace std;
 
-#define STARTING_CREDITS 1000
-#define STARTING_CLIENTS_EN_COURSE 10
-#define STARTING_CLIENTS_EN_ATTENTE 0
-
-#define PRIX_PAR_CAISSE_OUVERTE 3
-#define PRIX_PAR_CLIENT_EN_ATTENTE 2
-#define PRIX_PAR_CLIENT_EN_CAISSE 1
-#define PRIX_OUVERTURE_FERMETURE_CAISSE 2
-#define PRIX_TOUR_DE_JEU 1
-
 Jeu::Jeu(){
 
     //initialisation par défaut du jeu
@@ -34,7 +24,7 @@ Jeu::Jeu(){
     this->hypermarcheVide=false;
     this->nombreToursJoues=0;
 
-    this->devis = new struct_devis;
+    this->devis.resetDevis();
 
     this->errorMessage="";
 
@@ -177,21 +167,7 @@ vector<int> Jeu::getCaissesOuvertes(){
 
 void Jeu::facturation(){
 
-    vector<int> caissesOuvertes = getCaissesOuvertes();
-    uint16_t nbCaissesOuvertes = caissesOuvertes.size();
-    
-    this->devis->caisseOuverte=nbCaissesOuvertes;
-    this->devis->clientsEnAttente=this->clientsEnAttente;
-    
-    this->credits -= caissesOuvertes.size()*PRIX_PAR_CAISSE_OUVERTE;
-    this->credits -= this->clientsEnAttente*PRIX_PAR_CLIENT_EN_ATTENTE;
-
-    for(int numCaisse : caissesOuvertes){
-        this->devis->clientsEnCaisse+=this->caisses[numCaisse]->getClientsEnCaisse();
-        this->credits -= caisses[numCaisse]->getClientsEnCaisse()*PRIX_PAR_CLIENT_EN_CAISSE;
-    }
-
-    this->credits -= PRIX_TOUR_DE_JEU;
+    this->credits-=this->devis.getTotal();
 }
 
 void Jeu::afficheEtatsCaisses(){
@@ -284,8 +260,6 @@ void Jeu::changerCaisses(){
     for(int i=0; i<NB_CAISSES; i++){
         if (this->caisses[i]->aChanger()){
             this->caisses[i]->changerCaisse();
-            this->credits -= PRIX_OUVERTURE_FERMETURE_CAISSE;
-            this->devis->ouvertureFermetureDeCaisse++;
 
             if(!this->caisses[i]->estOuverte()){
                 this->clientsEnAttente+=this->caisses[i]->sortirTousLesClients();
@@ -314,55 +288,8 @@ bool Jeu::hypermarcheEstVide(){
     return true;
 }
 
-void Jeu::resetDevis(){
-    this->devis->clientsEnCaisse=0;
-    this->devis->caisseOuverte=0;
-    this->devis->clientsEnAttente=0;
-    this->devis->ouvertureFermetureDeCaisse=0;
-}
-
 void Jeu::afficheDevis(){
 
-    int totalOuvertureFermeture = this->devis->ouvertureFermetureDeCaisse*PRIX_OUVERTURE_FERMETURE_CAISSE;
-    int totalCaisseOuverte = this->devis->caisseOuverte*PRIX_PAR_CAISSE_OUVERTE;
-    int totalClientsEnAttente = this->devis->clientsEnAttente*PRIX_PAR_CLIENT_EN_ATTENTE;
-    int totalClientsEnCaisse = this->devis->clientsEnCaisse*PRIX_PAR_CLIENT_EN_CAISSE;
-
-    int total = 1 + totalOuvertureFermeture + totalCaisseOuverte + totalClientsEnAttente + totalClientsEnCaisse ;
-
-    cout << "-----------------------------------------------------------------" << endl;
-    
-    cout << "|\t\t\t\t\t\t\tPrix\t|" << endl;
-    
-    cout << "|\t\t\t\t\t\t\t\t|" << endl;
-
-    cout << "| ouverture/fermetures de caisses :\t" \
-    << this->devis->ouvertureFermetureDeCaisse \
-    << "  x  " << PRIX_OUVERTURE_FERMETURE_CAISSE << "cr\t= " \
-    << totalOuvertureFermeture << "cr\t|" << endl;
-
-    cout << "| caisse(s) ouverte(s) : \t\t" \
-    << this->devis->caisseOuverte \
-    << "  x  " << PRIX_PAR_CAISSE_OUVERTE << "cr\t= " \
-    << totalCaisseOuverte << "cr\t|" << endl;
-
-    cout << "| clients en attente :\t\t\t" \
-    << this->devis->clientsEnAttente \
-    << "  x  " << PRIX_PAR_CLIENT_EN_ATTENTE << "cr\t= " \
-    << totalClientsEnAttente << "cr\t|" << endl;
-
-    cout << "| clients en caisse :\t\t\t" \
-    << this->devis->clientsEnCaisse \
-    << "  x  " << PRIX_PAR_CLIENT_EN_CAISSE << "cr\t= " \
-    << totalClientsEnCaisse << "cr\t|" << endl;
-
-    cout << "| Tour:\t\t\t\t\t\t\t  1cr\t|" << endl;
-
-    cout << "|\t------------------------------------------------\t|" << endl;
-
-    cout << "| Total:\t\t\t\t\t\t  " << total << "cr\t|" << endl;
-
-    cout << "|\t\t\t\t\t\t\t\t|" << endl;
-
-    cout << "-----------------------------------------------------------------" << endl;
+    this->devis.calculerDevis(this->caisses, NB_CAISSES, this->clientsEnAttente);
+    this->devis.afficheDevis();
 }

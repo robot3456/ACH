@@ -7,10 +7,15 @@
 #include <vector>
 
 #include "Caisse.hpp"
+#include "Devis.hpp"
 
 using namespace std;
 
 #define NB_CAISSES 10
+#define STARTING_CREDITS 1000
+#define STARTING_CLIENTS_EN_COURSE 10
+#define STARTING_CLIENTS_EN_ATTENTE 0
+
 
 class Jeu{
 private:
@@ -27,16 +32,7 @@ private:
 
     string errorMessage;
 
-    struct struct_devis{
-
-        int ouvertureFermetureDeCaisse;
-        int clientsEnAttente;
-        int caisseOuverte;
-        int clientsEnCaisse;
-
-    };
-
-    struct_devis *devis;
+    Devis devis;
 
     vector<int> getCaissesOuvertes();
     string formaterChangement(char c);
@@ -73,12 +69,6 @@ public:
     bool actionsSurCaisses();
     void changerCaisses();
 
-    void resetDevis();
-
-    /**
-     * @brief Affich le devis du tour actuel avec les prix à payer
-     * 
-     */
     void afficheDevis();
 
     int mettreClientsEnAttente();

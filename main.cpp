@@ -38,7 +38,9 @@ int main(){
 
             do{   
                 
-                cout << "TOUR N°" << tour <<endl;
+                cout << "TOUR N°" << tour << "\n" << endl;
+
+                jeu.afficheDevis();
 
                 jeu.afficheEtatsCaisses();
                 jeu.afficheBudget();
@@ -52,8 +54,6 @@ int main(){
             jeu.changerCaisses();
             
             jeu.facturation();
-            jeu.afficheDevis();
-            jeu.resetDevis();
 
             jeu.sortirClientsDesCaisses();
             jeu.mettreClientsEnAttente();
