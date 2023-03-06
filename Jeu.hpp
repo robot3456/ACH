@@ -25,7 +25,6 @@ private:
     
     uint16_t clientsEnCourses;
     uint16_t clientsEnAttente;
-    uint16_t nombreToursJoues;
     
     Caisse *caisses[NB_CAISSES];
     char changementsCaisse[NB_CAISSES];

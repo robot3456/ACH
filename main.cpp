@@ -36,6 +36,8 @@ int main(){
 
             bool continuer=false;
 
+
+            // Demande à l'utilisateur le numéro de caisse à changer, tant que celui ci n'appuie pas sur "P"
             do{   
                 
                 cout << "TOUR N°" << tour << "\n" << endl;
@@ -76,19 +78,14 @@ int main(){
         score.setScore(jeu.getCredits());
 
 
-        // // score
+        // Score
         cout << "Quel est votre nom ?: " ;
         getline(cin, nomJoueur);
         score.setNomJoueur(nomJoueur);
-        cout << score.getNomJoueur() << endl ;
-        // score.TrieEtInsereScoreDansFichierTxt(SCORE_FILE);
-        // score.afficherScoresDepuisFichierTxt(SCORE_FILE);
-
-        // Score
         score.mettreAJourScoreboard(SCORE_FILE);
 
         
-        //demander restart
+        // Demande si le joueur veur refaire une partie
         cout << "Voulez vous recommencer ? o[oui]/n[non] :" ;
         getline(cin, restart);
 
@@ -97,8 +94,6 @@ int main(){
             score.reset();
         }
 
-        // delete &score;
-        // delete &jeu;
     }
 
     cout << "\n\

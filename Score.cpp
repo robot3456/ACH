@@ -65,17 +65,6 @@ void Score::creerFichierSiNExistePas(string filename){
     }
 }
 
-/* Ecrit le score contenu dans la variable score de l'instance en cours
-* @param: nom du fichier dans lequel le score doit être écrit 
-*/
-// void Score::ecrireScoreDansFichierTxt(string filename){
-//     this->creerFichierSiNExistePas(filename);
-//     ofstream scoreFile;
-//     scoreFile.open(filename, ios_base::app);
-//     scoreFile << this->nomJoueur << " " << this->score << endl;
-//     scoreFile.close();
-// }
-
 /* Lit le fichier contenant les scores et affiche 
 * le résultat dans un tableau
 * Si ce tableau contient plus de 10 lignes, il affichera les 10 meilleurs scores des joueurs
@@ -85,7 +74,9 @@ void Score::afficherScoresDepuisFichierTxt(string filename){
     
     creerFichierSiNExistePas(filename);
 
+    // Ouvre le fichier en lecture
     ifstream scoreFile;
+
     string nomJoueur;
     int scoreJoueur;
 
@@ -115,9 +106,9 @@ void Score::afficherScoresDepuisFichierTxt(string filename){
 
 
 /* Fonction récursive
-* Fonction qui Trie et insère les joueurs dans un fichier texte par ordre décroissant du score
+* Fonction qui Trie et insère les noms et scores des joueurs dans un vecteur <scoresTousLesJoueurs>
 * @param: nom du fichier dans lequel sont stockés les scores
-* PS : s'il vous plait Monsieur, mettez nous des points en plus, on a vraiment beaucoup travailé pour ce projet
+* PS : s'il vous plait Monsieur, mettez nous des points en plus, on a vraiment beaucoup travailé sur ce projet
 */
 void Score::ajouterNomsEtScoresDansVecteur(string filename, vector<Score>& scoresTousLesJoueurs){
     
@@ -142,7 +133,8 @@ void Score::ajouterNomsEtScoresDansVecteur(string filename, vector<Score>& score
     }
     scoreFile.close();
 }
-
+    
+/* Ajoute le nom et le score du joueur actuel au vecteur <scoresTousLesJoueurs> */
 void Score::ajouterNomEtScoreJoueurActuel(vector<Score>& scoresTousLesJoueurs){
     // Créer une instance de Score contenant le nom et le score du joueur actuel
     Score scoreCourant;
@@ -160,6 +152,7 @@ void Score::trierScoresParOrdreDecroissant(vector<Score>& scoresTousLesJoueurs){
     sort(scoresTousLesJoueurs.begin(), scoresTousLesJoueurs.end(), [](Score s1, Score s2) { return s1.getScore() > s2.getScore(); });
 }
 
+/* Ecriture des joueurs et scores contenus dans <scoresTousLesJoueurs> vers le fichier Scoreboard.txt */ 
 void Score::ecrireJoueursDansFichierTxt(string filename, vector<Score> scoresTousLesJoueurs){
     // Ouvrir le fichier en écriture et ajouter les joueurs triés au fichier
     ofstream scoreFileOut(filename);
@@ -170,19 +163,24 @@ void Score::ecrireJoueursDansFichierTxt(string filename, vector<Score> scoresTou
 }
 
 
-
+/* Fonction de mise à jour du tableau des scores avec le joueur actuel */
 void Score::mettreAJourScoreboard(string filename){
     
     vector<Score> scoresTousLesJoueurs;
 
+    // Ajoute les noms et les scores de tous les joueurs dans le vecteur <scoresTousLesJoueurs>
     ajouterNomsEtScoresDansVecteur(filename, scoresTousLesJoueurs);
 
+    // Ajoute le nom et le score du joueur actuel au vecteur <scoresTousLesJoueurs>
     ajouterNomEtScoreJoueurActuel(scoresTousLesJoueurs);
 
+    // Trie les joueurs du vecteur par ordre décroissant du score
     trierScoresParOrdreDecroissant(scoresTousLesJoueurs);
 
+    // Ecriture des joueurs et scores contenus dans <scoresTousLesJoueurs> vers le fichier Scoreboard.txt 
     ecrireJoueursDansFichierTxt(filename, scoresTousLesJoueurs);
 
+    // Affiche les scores du fichier Scoreboard.txt
     afficherScoresDepuisFichierTxt(filename);
 
 }

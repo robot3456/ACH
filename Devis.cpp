@@ -3,10 +3,16 @@
 
 using namespace std;
 
+/* Constructeur de la class Devis contenant la fonction "resetDevis" */
 Devis::Devis(){
     this->resetDevis();
 }
 
+/* Réinitialise les valeurs des clients en caisse, 
+* le nombre total de caisses ouvertes,
+* le nombre total de clients en attente, 
+* et le nombre d'ouvertures et fermetures de caisses prévues pour 1 tour  
+*/
 void Devis::resetDevis(){
     this->clientsEnCaisse=0;
     this->caisseOuverte=0;
@@ -14,6 +20,7 @@ void Devis::resetDevis(){
     this->ouvertureFermetureDeCaisse=0;
 }
 
+/* Affiche le devis */
 void Devis::afficheDevis(){
 
     int totalOuvertureFermeture = this->ouvertureFermetureDeCaisse*PRIX_OUVERTURE_FERMETURE_CAISSE;
@@ -60,6 +67,7 @@ void Devis::afficheDevis(){
     cout << "-----------------------------------------------------------------" << endl;
 }
 
+/* Retourne une estimation du nombre total de credits consommés pour 1 tour */
 int Devis::getTotal(){
     int total=0;
 
@@ -72,17 +80,23 @@ int Devis::getTotal(){
     return total;
 }
 
+/* Calcule le nombre de caisses et de clients qui vont coûter des crédits au joueur */
 void Devis::calculerDevis(Caisse *caisses[NB_CAISSES], int nbCaisses, int clientsEnAttente){
 
+    // Remise à zero de touts les attributs de classe de l'instance en cours
     this->resetDevis();
 
+    // Boucle qui itère sur chaque caisse
     for(int i=0; i<NB_CAISSES; i++){
+
+        // Si la caisse d'indice i est ouverte, on incrémente "caisseOuverte"
         if(caisses[i]->estOuverte())
             this->caisseOuverte++;
-        
+        // Si l'état de la caisse d'indice i est à changer, on incrémente la valeur de "ouvertureFermetureDeCaisse"
         if(caisses[i]->aChanger())
             this->ouvertureFermetureDeCaisse++;
 
+        // Calcul du nombre total de clients en caisse
         this->clientsEnCaisse+=caisses[i]->getClientsEnCaisse();
     }
 

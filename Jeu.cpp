@@ -14,6 +14,13 @@
 
 using namespace std;
 
+/* Constructeur de la classe Jeu contenant les variables :
+* credits : le nombre de crédits attribués initialement au joueur
+* clientsEnCourses : le nombre de clients initialement dans le magasin 
+* clientsEnAttente : le nombre de clients en attente de caisse 
+* hypermarcheVide : true si il y a 0 personnes dans l'hypermarche (caisses comprises) / false sinon 
+* nombreToursJoues : le nombre de tours du joueur 
+*/
 Jeu::Jeu(){
 
     //initialisation par défaut du jeu
@@ -22,7 +29,6 @@ Jeu::Jeu(){
     this->clientsEnAttente=STARTING_CLIENTS_EN_ATTENTE;
 
     this->hypermarcheVide=false;
-    this->nombreToursJoues=0;
 
     this->devis.resetDevis();
 
@@ -56,8 +62,9 @@ void Jeu::reset(){
     this->hypermarcheVide=false;
     this->clientsEnCourses=STARTING_CLIENTS_EN_COURSE;
     this->clientsEnAttente=0;
-    // this->clients_en_caisse =0;
 
+    // Pour chaque caisse, remettre le nombre de clients à 0
+    // et fermer la caisse (passée à l'état "false")
     for(int i=0; i<NB_CAISSES; i++){
         this->caisses[i]->resetClientsEnCaisse();
         this->caisses[i]->fermerCaisse();
@@ -87,10 +94,8 @@ int Jeu::mettreClientsEnAttente()
     /*Variable qui va compter le nombre de clients en course en moins*/
     int clientsEnMoins = 0;
 
-    /*
-    On itère sur tout les clients en course, on a une chance de 1/2 pour que le clients
-    passe en attente
-    */
+    /* On itère sur tout les clients en course, on a une chance de 1/2 pour que le clients
+    passe en attente */
     for(int i=0; i<this->clientsEnCourses; i++){
         if(std::rand()%2){
             clientsEnMoins++;
@@ -145,18 +150,23 @@ int Jeu::metttreClientsEnCaisses()
     return 1;
 }
 
+/* Ouvre la caisse d'indice n */
 void Jeu::ouvrirCaisse(int n){
     caisses[n]->ouvrirCaisse();
 }
 
+/* Ferme la caisse d'indice n */
 void Jeu::fermerCaisse(int n){
     caisses[n]->fermerCaisse();
 }
 
+/* Retourne un vecteur contenant le numero de toutes les caisses ouvertes */
 vector<int> Jeu::getCaissesOuvertes(){
     vector<int> caissesOuvertes;
 
     for(int i=0;i<NB_CAISSES; i++){
+
+        // Si la caisse est ouverte, ajouter son indice à la fin du vecteur <caissesOuvertes>
         if(caisses[i]->estOuverte()){
             caissesOuvertes.push_back(i);
         }
@@ -164,22 +174,22 @@ vector<int> Jeu::getCaissesOuvertes(){
     return caissesOuvertes;
 }
 
-
+/* Supprime le montant du devis au crédit du joueur */
 void Jeu::facturation(){
-
     this->credits-=this->devis.getTotal();
 }
 
 void Jeu::afficheEtatsCaisses(){
-
     for(int i=0; i<NB_CAISSES; i++){
         cout << this->caisses[i]->getChangement() << " Caisse " << i+1 << ":\t"<< this->caisses[i]->afficheInfoCaisse() << endl;
     }   
 }
 
+/* Affiche le budget du joueur */
 void Jeu::afficheBudget(){
     cout << "Budget: " << this->credits << " crédits." << endl;
 }
+
 
 void Jeu::sortirClientsDesCaisses(){
     vector<int> caissesOuvertes = getCaissesOuvertes();
@@ -196,6 +206,7 @@ void Jeu::sortirClientsDesCaisses(){
 
 }
 
+/* Affiche le nombre total de clients à chaque stade de l'hypermarché */
 void Jeu::affichePositionClients(){
 
     vector<int> caissesOuvertes = getCaissesOuvertes();
@@ -207,6 +218,7 @@ void Jeu::affichePositionClients(){
     cout << "Clients dans l'hypermarché: " << this->clientsEnCourses << ", en attente de caisse: " << this->clientsEnAttente << " et aux caisses: " << clientsEnCaisses << ".\n";
 }
 
+/* Demande au joueur les actions qu'il souhaite effectuer sur chaque caisse */
 bool Jeu::actionsSurCaisses(){
 
     string choix;
@@ -217,28 +229,28 @@ bool Jeu::actionsSurCaisses(){
     cout << "Choisir une caisse à changer[1-10], Passer et appliquer tout les changements[P] :";
     getline(cin, choix);
     
-    //On efface le caractère \n de la chaine pour avoir que le choix de l'utilisateur
+    // Suppression du caractère \n de la chaine pour obtenir uniquement le choix de l'utilisateur
     if (!choix.empty() && choix[choix.length()-1] == '\n'){
         choix.erase(choix.length()-1);
     }
 
-    //On vérifie que la saisie a été faite correctement
+    // Vérification que la saisie a été faite correctement
     if(cin.fail()){
         this->errorMessage= "\033[1;31mErreur dans la saisie du choix, veuillez réessayer.\033[0m";
         cin.clear();
         return false;
     }
 
-    //On met la chaine de caractère en majuscule pour pouvoir entrer "p" ou "P"
+    // Mise en majuscules de la chaine de caractère afin de pouvoir entrer "p" ou "P" (case insensitive)
     for(auto & c: choix) c = toupper(c);
 
     if(choix=="P"){
         this->errorMessage="";
         return true;
     }
-        
+    
+    // Si la saisie de l'utilisateur est valide, alors on effectue les actions qu'il souhaite sur les caisses
     try{
-        
         int choixNumCaisse = stoi(choix);
         if(choixNumCaisse<=NB_CAISSES && choixNumCaisse>=1){
             this->caisses[choixNumCaisse-1]->changerEtat();
@@ -246,18 +258,22 @@ bool Jeu::actionsSurCaisses(){
             return false;
         }
 
+    // Sinon on gère l'exception en demandant une nouvelle saisie
     }catch(exception &err){
         this->errorMessage= "\033[1;31mErreur dans la saisie du choix, veuillez réessayer.\033[0m";
         return false;
     }
 
+    // Demande à l'utilisateur d'entrer une saisie valide
     this->errorMessage="\033[1;31mVeuillez selectionner \"[1-10\" ou \'P\'\033[0m";
     return false;
 
 }
 
+/* Inversion de l'état des caisses sélectionnées par le joueur */
 void Jeu::changerCaisses(){
     for(int i=0; i<NB_CAISSES; i++){
+
         if (this->caisses[i]->aChanger()){
             this->caisses[i]->changerCaisse();
 
@@ -269,6 +285,7 @@ void Jeu::changerCaisses(){
     }
 }
 
+/* Si l'hypermarché est vide, retourne true. False sinon */
 bool Jeu::hypermarcheEstVide(){
 
     if(this->clientsEnCourses>0)
@@ -288,6 +305,7 @@ bool Jeu::hypermarcheEstVide(){
     return true;
 }
 
+/* Calcule et affiche le devis */
 void Jeu::afficheDevis(){
 
     this->devis.calculerDevis(this->caisses, NB_CAISSES, this->clientsEnAttente);

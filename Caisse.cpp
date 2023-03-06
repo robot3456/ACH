@@ -117,7 +117,7 @@ void Caisse::changerCaisse(){
     this->ouverte = !this->ouverte;
 }
 
-
+/* Retourne le nombre de clients sortis */
 int Caisse::sortirTousLesClients(){
     uint16_t clientsSortis = this->clientsEnCaisse;
     this->clientsEnCaisse=0;
