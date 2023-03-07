@@ -17,6 +17,9 @@ Caisse::Caisse(){
     this->etatAChanger=false;
 }
 
+// Destructeur 
+Caisse::~Caisse(){}
+
 /* Supprime un client de la caisse */
 void Caisse::sortirClient(){
     this->clientsEnCaisse--;

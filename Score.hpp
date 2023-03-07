@@ -19,8 +19,11 @@ private:
 public:
 
     Score();
+    ~Score();
 
     void reset();
+
+    string demanderNomJoueur();
 
     string getNomJoueur();
     void setNomJoueur(string nomJoueur);

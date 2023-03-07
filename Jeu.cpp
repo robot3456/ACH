@@ -42,6 +42,9 @@ Jeu::Jeu(){
 }
 
 
+/* Destructeur de la classe Jeu */
+Jeu::~Jeu(){}
+
 bool Jeu::getHypermarcheVide(){
     return this->hypermarcheVide;
 }

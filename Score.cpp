@@ -15,9 +15,29 @@ Score::Score(){
     this->score=0;
 }
 
+/* Destructeur de la classe Score */
+Score::~Score(){}
+
 void Score::reset(){
     this->nomJoueur="";
     this->score=0;
+}
+
+string Score::demanderNomJoueur(){
+
+    string nomJoueur;
+
+    while(nomJoueur.empty()){
+
+        cout << "Quel est votre nom ? :";
+        getline(cin, nomJoueur);
+        this->nomJoueur = nomJoueur;
+
+        if(nomJoueur.empty()){
+            cout << "\033[1;31mErreur ! Veuillez entrer un nom valide.\033[0m"<< endl;
+        }
+    }
+    return nomJoueur;
 }
 
 /* Getter du nom du joueur en cours */
@@ -82,25 +102,31 @@ void Score::afficherScoresDepuisFichierTxt(string filename){
 
     scoreFile.open(filename);
 
-    cout << "\n\t---- TABEAU DES MEILLEURS SCORES ----" << endl;
-    cout << "\t-------------------------------------" << endl;
-    cout <<"\tRANG\tNOM\t\t\tSCORE" << endl;
-    cout << "\t-------------------------------------" << endl;
+    cout << "\n\t---------- TABEAU DES MEILLEURS SCORES ----------" << endl;
+    cout << "\t-------------------------------------------------" << endl;
+    cout <<"\tRANG\tNOM\t\t\t\tSCORE" << endl;
+    cout << "\t-------------------------------------------------" << endl;
 
     // Afficher les 10 meilleurs scores ou afficher tous les scores si il y en a moins de 10 
     int i=0;
     while ( scoreFile >> nomJoueur >> scoreJoueur && i<10){
 
-        if ((nomJoueur == this->nomJoueur) && (scoreJoueur == this->score)){
-            cout << "\033[1;32m" << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << "\033[0m" << endl ;
-        }else{
-            cout << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << endl ;
+        /* Le nombre de tabs à afficher entre le nom du joueur et le score dépend de la longueur du nom du joueur: 
+        * Si le nom contient 7 lettres, le score est décalé de 1 tab vers la droite
+        * Il faut donc retirer 1 tab toutes les 7 lettres 
+        * Donc : nb de tabs = 4(choix arbitraire de tabs) - quotient de la division (longueur nom / 7 )
+        */
+        string nombreDeTabs( (4-(nomJoueur.length()/7)) , '\t');
 
+        if ((nomJoueur == this->nomJoueur) && (scoreJoueur == this->score)){
+            cout << "\033[1;32m" << "\t" << i+1 << "\t" << nomJoueur << nombreDeTabs << scoreJoueur << "\033[0m" << endl ;
+        }else{
+            cout << "\t" << i+1 << "\t" << nomJoueur << nombreDeTabs << scoreJoueur << endl ;
         }
         i++;
     }
 
-    cout << "\t-------------------------------------\n" << endl;
+    cout << "\t-------------------------------------------------\n" << endl;
     scoreFile.close();
 }
 

@@ -20,6 +20,7 @@ private:
 public:
 
     Devis();
+    ~Devis();
 
     void resetDevis();
 

@@ -40,6 +40,7 @@ private:
 public:
 
     Jeu();
+    ~Jeu();
 
     bool getHypermarcheVide();
     void setHypermarcheVide(bool state);

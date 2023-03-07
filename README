@@ -24,3 +24,4 @@ TODO:
 [x] Devis ne se met pas à jour dans le do {} while
 [] CHANGER LE NOMBRE DE CLIENTS A 100 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 [x] ResetDevis dans la classe devis : pas de this 
+[] retirer les parties du code qui ne servent a rien 

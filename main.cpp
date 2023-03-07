@@ -79,9 +79,8 @@ int main(){
 
 
         // Score
-        cout << "Quel est votre nom ?: " ;
-        getline(cin, nomJoueur);
-        score.setNomJoueur(nomJoueur);
+
+        score.demanderNomJoueur();
         score.mettreAJourScoreboard(SCORE_FILE);
 
         
