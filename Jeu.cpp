@@ -240,7 +240,7 @@ bool Jeu::actionsSurCaisses(){
     cout << endl;
     cout << "Action sur les caisses ..." << endl;
     cout << this->errorMessage << endl;
-    cout << "Choisir une caisse à changer[1-10] ou tous les ouvrir[A], Passer et appliquer tout les changements[P] :";
+    cout << "Choisir une caisse à changer[1-10] OU changer l'état de toutes les caisses [A]. Appliquer les changements et jouer le tour[P] :";
     getline(cin, choix);
     
     // Suppression du caractère \n de la chaine pour obtenir uniquement le choix de l'utilisateur
