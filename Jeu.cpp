@@ -240,7 +240,7 @@ bool Jeu::actionsSurCaisses(){
     cout << endl;
     cout << "Action sur les caisses ..." << endl;
     cout << this->errorMessage << endl;
-    cout << "Choisir une caisse à changer[1-10], Passer et appliquer tout les changements[P] :";
+    cout << "Choisir une caisse à changer[1-10] ou tous les ouvrir[A], Passer et appliquer tout les changements[P] :";
     getline(cin, choix);
     
     // Suppression du caractère \n de la chaine pour obtenir uniquement le choix de l'utilisateur
@@ -263,6 +263,14 @@ bool Jeu::actionsSurCaisses(){
         return true;
     }
     
+    if(choix=="A"){
+        for(int i=0; i<NB_CAISSES; i++){
+            if(!this->caisses[i]->estOuverte())
+                this->caisses[i]->changerEtat();
+        }
+        return false;
+    }
+
     // Si la saisie de l'utilisateur est valide, alors on effectue les actions qu'il souhaite sur les caisses
     try{
         int choixNumCaisse = stoi(choix);
