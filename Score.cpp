@@ -111,17 +111,10 @@ void Score::afficherScoresDepuisFichierTxt(string filename){
     int i=0;
     while ( scoreFile >> nomJoueur >> scoreJoueur && i<10){
 
-        /* Le nombre de tabs à afficher entre le nom du joueur et le score dépend de la longueur du nom du joueur: 
-        * Si le nom contient 7 lettres, le score est décalé de 1 tab vers la droite
-        * Il faut donc retirer 1 tab toutes les 7 lettres 
-        * Donc : nb de tabs = 4(choix arbitraire de tabs) - quotient de la division (longueur nom / 7 )
-        */
-        string nombreDeTabs( (4-(nomJoueur.length()/7)) , '\t');
-
         if ((nomJoueur == this->nomJoueur) && (scoreJoueur == this->score)){
-            cout << "\033[1;32m" << "\t" << i+1 << "\t" << nomJoueur << nombreDeTabs << scoreJoueur << "\033[0m" << endl ;
+            cout << "\033[1;32m" << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << "\033[0m" << endl ;
         }else{
-            cout << "\t" << i+1 << "\t" << nomJoueur << nombreDeTabs << scoreJoueur << endl ;
+            cout << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << endl ;
         }
         i++;
     }
