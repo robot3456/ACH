@@ -51,10 +51,12 @@ Jeu::~Jeu(){
 
 }
 
+/* Accessseur de la variable hypermarcheVide */
 bool Jeu::getHypermarcheVide(){
     return this->hypermarcheVide;
 }
 
+/* Setter de la variable hypermarcheVide */
 void Jeu::setHypermarcheVide(bool newState){
     this->hypermarcheVide = newState;
 }
@@ -199,6 +201,7 @@ void Jeu::facturation(){
     this->credits-=this->devis.getTotal();
 }
 
+/* Affiche les états des caisses */
 void Jeu::afficheEtatsCaisses(){
     for(int i=0; i<NB_CAISSES; i++){
         cout << this->caisses[i]->getChangement() << " Caisse " << i+1 << ":\t"<< this->caisses[i]->afficheInfoCaisse() << endl;
@@ -210,13 +213,16 @@ void Jeu::afficheBudget(){
     cout << "Budget: " << this->credits << " crédits." << endl;
 }
 
-
+/* Méthode qui sort les clients des caisses pour ce tour */
 void Jeu::sortirClientsDesCaisses(){
     vector<int> caissesOuvertes = getCaissesOuvertes();
+
+    /* On ne fait rien si aucune caisse est ouverte */
     if(caissesOuvertes.size()==0){
         return; 
     }
 
+    /* Sort un client pour chaque caisse ouverte */
     for(int num_caisse : caissesOuvertes){
         if(this->caisses[num_caisse]->getClientsEnCaisse()==0){
             continue;

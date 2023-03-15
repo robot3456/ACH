@@ -53,38 +53,46 @@ int main(){
 
             }while(!continuer);
 
+            /* Applique les changements sur les caisses */
             jeu.changerCaisses();
-            
+
+            /* Facture toutes les actions */            
             jeu.facturation();
 
+            /* Sort les clients des caisses */
             jeu.sortirClientsDesCaisses();
+
+            /* Choisit les clients à mettre en attente */
             jeu.mettreClientsEnAttente();
+
+            /* Met les clients en caisse parmis les clients en attente */
             jeu.metttreClientsEnCaisses();
 
             cout << endl;
 
+            /* Augmente le tour du jeu */
             jeu.setTour(jeu.getTour() + 1);
         }
 
+
+        /* Affichage du jeu ou perdu ou gagné */
         if(jeu.getHypermarcheVide()){
             cout << "\033[1;32mBien joué! Vous avez gagné!\033[0m" << endl;
         }else{
             cout << "\033[1;31mDommage. Vous avez perdu...\033[0m" << endl;
         }
 
+        /* Affichage des info de fin */
         cout << "Vous avez joue " << jeu.getTour()-1 << " tours" << endl;
         cout << "Votre score est :" << jeu.getCredits() << " credits" << endl ;
         
+        /* Gestion du Score */
         score.setScore(jeu.getCredits());
-
-
-        // Score
-
         score.demanderNomJoueur();
         score.mettreAJourScoreboard(SCORE_FILE);
 
         
-        // Demande si le joueur veur refaire une partie
+        /* Demande si le joueur veur refaire une partie */
         cout << "Voulez vous recommencer ? o[oui]/n[non] :" ;
         getline(cin, restart);
 
@@ -95,6 +103,7 @@ int main(){
 
     }
 
+    /* Affichage du message de fin si le joueur ne veut pas continuer la partie */
     cout << "\n\
             \t------------------------------------\n \
             \t|        Merci d'avoir joué !      |\n \

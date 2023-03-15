@@ -20,6 +20,8 @@ void Score::reset(){
     this->score=0;
 }
 
+/* Demande le nom du joueur et le renvoie en tant que chaine de caractères 
+* @return nom du joueur*/
 string Score::demanderNomJoueur(){
 
     string nomJoueur;
@@ -37,7 +39,8 @@ string Score::demanderNomJoueur(){
     return nomJoueur;
 }
 
-/* Getter du nom du joueur en cours */
+/* Getter du nom du joueur en cours 
+* @return nom du joueur*/
 string Score::getNomJoueur(){
     // cout << "Votre nom est: " << this->nomJoueur <<endl;
     return this->nomJoueur;
