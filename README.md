@@ -38,7 +38,17 @@ RANG    NOM                             SCORE
 
                         TOUR N°1
 -----------------------------------------------------------------                                         
-|                                                       Prix    |                                                                                                                            |                                                               |                                                                                                                            | ouverture/fermetures de caisses :     0  x  2cr       = 0cr   |                                                                                                                            | caisse(s) ouverte(s) :                0  x  3cr       = 0cr   |                                                                                                                            | clients en attente :                  0  x  2cr       = 0cr   |                                                                                                                            | clients en caisse :                   0  x  1cr       = 0cr   |                                                                                                                            | Tour:                                                   1cr   |                                                                                                                            |       ------------------------------------------------        |                                                                                                                            | Total:                                                  1cr   |                                                                                                                            |                                                               |                                                                                                                            -----------------------------------------------------------------
+|                                                       Prix    |
+|                                                               |
+| ouverture/fermetures de caisses :     0  x  2cr       = 0cr   |
+| caisse(s) ouverte(s) :                0  x  3cr       = 0cr   |
+| clients en attente :                  0  x  2cr       = 0cr   |
+| clients en caisse :                   0  x  1cr       = 0cr   |
+| Tour:                                                   1cr   |
+|       ------------------------------------------------        |
+| Total:                                                  1cr   |
+|                                                               |
+-----------------------------------------------------------------
 
 [-] Caisse 1         [Fermée]
 [-] Caisse 2:        [Fermée]
