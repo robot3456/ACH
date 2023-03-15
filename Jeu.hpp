@@ -2,6 +2,7 @@
 #define JEU_HPP
 
 
+#include <memory>
 #include <stdint.h>
 #include <string>
 #include <vector>
@@ -26,8 +27,9 @@ private:
     
     uint16_t clientsEnCourses;
     uint16_t clientsEnAttente;
-    
+
     Caisse *caisses[NB_CAISSES];
+
     char changementsCaisse[NB_CAISSES];
 
     string errorMessage;

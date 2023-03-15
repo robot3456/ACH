@@ -43,7 +43,13 @@ Jeu::Jeu(){
 
 
 /* Destructeur de la classe Jeu */
-Jeu::~Jeu(){}
+Jeu::~Jeu(){
+
+    for(int i=0; i<NB_CAISSES; i++){
+        delete this->caisses[i];
+    }
+
+}
 
 bool Jeu::getHypermarcheVide(){
     return this->hypermarcheVide;
