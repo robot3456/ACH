@@ -37,7 +37,7 @@ public:
 
     void afficherScoresDepuisFichierTxt(string filename);
 
-    // ajout
+    // Ajouts
     void ajouterNomsEtScoresDansVecteur(string filename, vector<Score>& scoresTousLesJoueurs);
     void ajouterNomEtScoreJoueurActuel(vector<Score>& scoresTousLesJoueurs);
     void trierScoresParOrdreDecroissant(vector<Score>& scoresTousLesJoueurs);
