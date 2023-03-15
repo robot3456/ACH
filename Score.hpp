@@ -35,7 +35,6 @@ public:
     void creerFichier(string filename);
     void creerFichierSiNExistePas(string filename);
 
-    // void ecrireScoreDansFichierTxt(string filename);
     void afficherScoresDepuisFichierTxt(string filename);
 
     // ajout

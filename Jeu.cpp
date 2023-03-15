@@ -76,7 +76,7 @@ int Jeu::getCredits(){
     return this->credits;
 }
 
-/* Réinitialise les valeurs à celles au départ 
+/* Réinitialise les valeurs à celles de départ 
 afin de pouvoir recommencer une nouvelle partie */
 void Jeu::reset(){
 
@@ -95,10 +95,10 @@ void Jeu::reset(){
 
 
 /*  
-*   Fonction qui met un nombre aléatoir de clients en attente
+*   Attribue un nombre aléatoire de clients en attente
 *   Renvoie:
 *       le nombre de clients qui sont mis en attente
-*       -1, Erreur il y a un nombre négatif de clients en coursr -> Impossible
+*       -1, Erreur il y a un nombre négatif de clients en cours -> Cas Impossible
 */
 int Jeu::mettreClientsEnAttente()
 {
@@ -147,11 +147,11 @@ int Jeu::metttreClientsEnCaisses()
     vector<int> caisseOuvertes = this->getCaissesOuvertes();
     int nbCaissesOuvertes = caisseOuvertes.size();
 
-    /*On renvoie 0 s'il y a aucune caisse ouverte*/
+    /*Renvoie 0 s'il n'y a aucune caisse ouverte*/
     if (nbCaissesOuvertes==0)
         return 0;
 
-    /*On initialise une variable pour choisir une caisse ouverte aléatoire*/
+    /*Variable pour choisir une caisse ouverte aléatoire*/
     int caisseOuverteAleatoire;
 
     /*On itère sur tout les clients en attente, */
@@ -160,14 +160,12 @@ int Jeu::metttreClientsEnCaisses()
         /*On choisit une caisse ouverte aléatoire*/
         caisseOuverteAleatoire = caisseOuvertes[rand()%nbCaissesOuvertes];
 
-        /*On ajoute le client à la caisse aléatoire choisi*/
+        /* Ajout du client à la caisse aléatoire choisie */
         this->caisses[caisseOuverteAleatoire]->ajouterClientEnCaisse();
     }
 
-    /*
-    Tout les clients en attente on été placé, on remet le nombre de clients en attente à 0
-    et on renvoie 1.
-    */
+    /* Lorsque tous les clients en attente on été placés, on remet le nombre de clients en attente à 0
+    et on renvoie 1 */
     this->clientsEnAttente=0;
     return 1;
 }
