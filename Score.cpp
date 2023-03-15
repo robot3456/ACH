@@ -15,9 +15,6 @@ Score::Score(){
     this->score=0;
 }
 
-/* Destructeur de la classe Score */
-Score::~Score(){}
-
 void Score::reset(){
     this->nomJoueur="";
     this->score=0;

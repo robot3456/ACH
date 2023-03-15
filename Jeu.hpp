@@ -62,10 +62,6 @@ public:
     void ouvrirCaisse(int n);
     void fermerCaisse(int n);
 
-    /**
-     * @brief Créer le devis et facture le joueur pour le tour actuel
-     * 
-     */
     void facturation();
 
     void afficheEtatsCaisses();

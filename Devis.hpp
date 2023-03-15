@@ -20,14 +20,9 @@ private:
 public:
 
     Devis();
-    ~Devis();
 
     void resetDevis();
 
-    /**
-     * @brief Affich le devis du tour actuel avec les prix à payer
-     * 
-     */
     void afficheDevis();
     
     int getTotal();

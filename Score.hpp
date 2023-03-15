@@ -19,7 +19,6 @@ private:
 public:
 
     Score();
-    ~Score();
 
     void reset();
 

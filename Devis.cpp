@@ -8,9 +8,6 @@ Devis::Devis(){
     resetDevis();
 }
 
-/* Destructeur de la classe Devis */
-Devis::~Devis(){}
-
 /* Réinitialise les valeurs des clients en caisse, 
 * le nombre total de caisses ouvertes,
 * le nombre total de clients en attente, 

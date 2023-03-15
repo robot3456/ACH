@@ -15,7 +15,7 @@ private:
 public:
 
     Caisse();
-    ~Caisse();
+
 
     string afficheInfoCaisse();
 
