@@ -2,7 +2,13 @@
 
 ### **INSTALLATION:**
 ---
-#### Commencez par cloner ce repo :
+
+#### Commencez par vous rendre dans votre répertoire de travail. Exemple : 
+```shell
+cd /home/user/Downloads/
+```
+
+#### Clonez ce repo :
 ```shell
 git clone https://github.com/robot3456/ACH
 ```
