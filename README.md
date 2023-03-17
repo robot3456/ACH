@@ -1,4 +1,4 @@
-## Projet hypermarché en c++ par Qassim-Tayab MANSOOR et Kacper KUPIS
+## Projet hypermarché en C++ par Qassim-Tayab MANSOOR et Kacper KUPIS
 
 ### **INSTALLATION:**
 ---
@@ -79,18 +79,13 @@ Choisir une caisse à changer[1-10] OU changer l'état de toutes les caisses [A]
 - [x] Mettre les couleurs sur Fermée/ouvertes
 - [x] Changer le saisie des actions pour ouvrir 1 caisse
 - [x] Changer les noms des classes et les {}
-- [ ] Ajouter une fonction pour n'afficher que le tour actuelle (supprimer les trucs avant avec un clear(pas ouf) ou autre fonction)
-- [ ] Regrouper les mêmes méthodes au même endroit dans le code (par ex tout les affiche au même endroit, etc...)
 - [x] Commenter le code 
-- [x] Mettre tout en camel case
-- [ ] Enlever les accolades s'il y a un if d'une seule ligne (pas besoin)
-- [ ] Enlever les include qui servent à rien
+- [x] Mettre tout en camelCase
 - [x] Bouton pour changer l'etat de / pour ouvrir toutes les caisses
 - [x] ATTENTION: Score::CreateFileIfExists() efface le fichier d'avant ! il faut le changer
 - [x] Demander nom a l'utilisateur pour le stocker dans le tableau des scores
 - [x] Erreur dans scorefile qd le nom du joueur est la touche <entrée> 
 - [x] Devis ne se met pas à jour dans le do {} while
-- [x] CHANGER LE NOMBRE DE CLIENTS A 100 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-- [x] ResetDevis dans la classe devis : pas de this 
-- [x] retirer les parties du code qui ne servent a rien 
-
+- [x] ResetDevis() dans la classe devis : pas de this 
+- [x] Retirer les parties du code qui ne servent a rien 
+- [x] CHANGER LE NOMBRE DE CLIENTS A 100 !
