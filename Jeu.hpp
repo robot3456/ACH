@@ -1,10 +1,6 @@
 #ifndef JEU_HPP
 #define JEU_HPP
 
-
-#include <memory>
-#include <stdint.h>
-#include <string>
 #include <vector>
 
 #include "Caisse.hpp"

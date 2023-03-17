@@ -1,7 +1,4 @@
 #include "Caisse.hpp"
-#include <cstdint>
-#include <iostream>
-#include <string>
 
 #define CLIENT_EN_CAISSE_DEBUT 0
 

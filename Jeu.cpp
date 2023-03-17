@@ -1,16 +1,6 @@
 #include "Jeu.hpp"
 
-#include <cstddef>
-#include <cstdint>
-#include <cstdlib>
-#include <exception>
-#include <stdlib.h>
-#include <time.h>
 #include <iostream>
-#include <vector>
-#include <cctype>
-#include <string>
-#include <limits>
 
 using namespace std;
 

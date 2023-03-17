@@ -1,5 +1,4 @@
 #include <iostream>
-#include <ostream>
 
 #include "Jeu.hpp"
 #include "Score.hpp" 

@@ -1,7 +1,6 @@
 #ifndef CAISSE_HPP
 #define CAISSE_HPP
 
-#include <stdint.h>
 #include <string>
 
 using namespace std;
