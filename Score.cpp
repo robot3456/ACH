@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <sstream>
 
+#define nombreEspaces 28
+
 using namespace std;
 
 /* Constructeur contenant le nom du joueur et son score 
@@ -103,17 +105,19 @@ void Score::afficherScoresDepuisFichierTxt(string filename){
 
     cout << "\n\t---------- TABEAU DES MEILLEURS SCORES ----------" << endl;
     cout << "\t-------------------------------------------------" << endl;
-    cout <<"\tRANG\tNOM\t\t\t\tSCORE" << endl;
+    cout <<"\tRANG\tNOM" << string(nombreEspaces, ' ') << "SCORE" << endl;
     cout << "\t-------------------------------------------------" << endl;
 
     // Afficher les 10 meilleurs scores ou afficher tous les scores si il y en a moins de 10 
     int i=0;
     while ( scoreFile >> nomJoueur >> scoreJoueur && i<10){
 
+        string nombreEspacesFormate(nombreEspaces+3-(nomJoueur.length()) , ' ');
+
         if ((nomJoueur == this->nomJoueur) && (scoreJoueur == this->score)){
-            cout << "\033[1;32m" << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t\t" << scoreJoueur << "\033[0m" << endl ;
+            cout << "\033[1;32m" << "\t" << i+1 << "\t" << nomJoueur << nombreEspacesFormate << scoreJoueur << "\033[0m" << endl ;
         }else{
-            cout << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t\t" << scoreJoueur << endl ;
+            cout << "\t" << i+1 << "\t" << nomJoueur << nombreEspacesFormate << scoreJoueur << endl ;
         }
         i++;
     }
