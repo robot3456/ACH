@@ -3,16 +3,18 @@
 
 using namespace std;
 
-/* Constructeur de la class Devis contenant la fonction "resetDevis" */
+/**
+ * @brief Constructeur par défaut de la classe Devis
+ * 
+ */
 Devis::Devis(){
     resetDevis();
 }
 
-/* Réinitialise les valeurs des clients en caisse, 
-* le nombre total de caisses ouvertes,
-* le nombre total de clients en attente, 
-* et le nombre d'ouvertures et fermetures de caisses prévues pour 1 tour  
-*/
+/**
+ * @brief Réinitialise les valeurs du devis et les mets à 0
+ * 
+ */
 void Devis::resetDevis(){
     this->clientsEnCaisse=0;
     this->caisseOuverte=0;
@@ -20,7 +22,10 @@ void Devis::resetDevis(){
     this->ouvertureFermetureDeCaisse=0;
 }
 
-/* Affiche le devis */
+/**
+ * @brief Affiche le devis sous forme d'un tableau
+ * 
+ */
 void Devis::afficheDevis(){
 
     int totalOuvertureFermeture = this->ouvertureFermetureDeCaisse*PRIX_OUVERTURE_FERMETURE_CAISSE;
@@ -67,7 +72,11 @@ void Devis::afficheDevis(){
     cout << "-----------------------------------------------------------------" << endl;
 }
 
-/* Retourne une estimation du nombre total de credits consommés pour 1 tour */
+/**
+ * @brief Calcul le total des crédits à payer pour le tour actuel
+ * 
+ * @return int Total des crédits à payer
+ */
 int Devis::getTotal(){
     int total=0;
 
@@ -80,7 +89,13 @@ int Devis::getTotal(){
     return total;
 }
 
-/* Calcule le nombre de caisses et de clients qui vont coûter des crédits au joueur */
+/**
+ * @brief Calcul le devis à payer à partir des des variables du jeu
+ * 
+ * @param caisses Liste des caisses
+ * @param nbCaisses Nombre de caisses dans la liste
+ * @param clientsEnAttente Nombre de clients en attente au tour actuel
+ */
 void Devis::calculerDevis(Caisse *caisses[NB_CAISSES], int nbCaisses, int clientsEnAttente){
 
     // Remise à zero de touts les attributs de classe de l'instance en cours

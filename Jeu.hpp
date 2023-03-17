@@ -41,36 +41,32 @@ public:
     ~Jeu();
 
     bool getHypermarcheVide();
-    void setHypermarcheVide(bool state);
-
-    int getTour();
-    void setTour(int tourActuel);
 
     bool hypermarcheEstVide();
 
+    int getTour();
+    void setTour(int tourActuel);
+    
     int getCredits();
 
     void reset();
 
-    int clientsVersCaisse();
     void sortirClientsDesCaisses();
 
-    void ouvrirCaisse(int n);
-    void fermerCaisse(int n);
+    int mettreClientsEnAttente();
+    int metttreClientsEnCaisses();
+
+    bool actionsSurCaisses();
+    void changerCaisses();
 
     void facturation();
 
     void afficheEtatsCaisses();
     void afficheBudget();
     void affichePositionClients(); 
-
-    bool actionsSurCaisses();
-    void changerCaisses();
-
     void afficheDevis();
-
-    int mettreClientsEnAttente();
-    int metttreClientsEnCaisses();
+    
+    
 };
 
 
