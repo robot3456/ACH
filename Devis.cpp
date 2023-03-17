@@ -93,8 +93,14 @@ void Devis::calculerDevis(Caisse *caisses[NB_CAISSES], int nbCaisses, int client
         if(caisses[i]->estOuverte())
             this->caisseOuverte++;
         // Si l'état de la caisse d'indice i est à changer, on incrémente la valeur de "ouvertureFermetureDeCaisse"
-        if(caisses[i]->aChanger())
+        if(caisses[i]->aChanger()){
             this->ouvertureFermetureDeCaisse++;
+
+            /* On incrémente aussi caisseOuverte si on ouvre une caisse fermé */
+            if (!caisses[i]->estOuverte())
+                this->caisseOuverte++;
+        }
+            
 
         // Calcul du nombre total de clients en caisse
         this->clientsEnCaisse+=caisses[i]->getClientsEnCaisse();
