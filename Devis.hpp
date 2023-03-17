@@ -1,3 +1,6 @@
+#ifndef DEVIS_HPP
+#define DEVIS_HPP
+
 #include "Caisse.hpp"
 
 #define PRIX_PAR_CAISSE_OUVERTE 3
@@ -30,3 +33,6 @@ public:
     void calculerDevis(Caisse *caisses[], int nbCaisses, int clientsEnAttente);
 
 };
+
+
+#endif //DEVIS_HPP

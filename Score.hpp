@@ -2,7 +2,6 @@
 #define SCORE_HPP
 
 
-
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -44,9 +43,6 @@ public:
     void ecrireJoueursDansFichierTxt(string filename, vector<Score> scoresTousLesJoueurs);
     void mettreAJourScoreboard(string filename);
 
-
-
 };
-
 
 #endif // SCORE_HPP
