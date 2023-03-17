@@ -111,9 +111,9 @@ void Score::afficherScoresDepuisFichierTxt(string filename){
     while ( scoreFile >> nomJoueur >> scoreJoueur && i<10){
 
         if ((nomJoueur == this->nomJoueur) && (scoreJoueur == this->score)){
-            cout << "\033[1;32m" << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << "\033[0m" << endl ;
+            cout << "\033[1;32m" << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t\t" << scoreJoueur << "\033[0m" << endl ;
         }else{
-            cout << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t" << scoreJoueur << endl ;
+            cout << "\t" << i+1 << "\t" << nomJoueur << "\t\t\t\t" << scoreJoueur << endl ;
         }
         i++;
     }
