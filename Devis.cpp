@@ -12,7 +12,7 @@ Devis::Devis(){
 }
 
 /**
- * @brief Réinitialise les valeurs du devis et les mets à 0
+ * @brief Réinitialise les attributs de la classe "Devis" et les met à 0
  * 
  */
 void Devis::resetDevis(){
@@ -73,7 +73,7 @@ void Devis::afficheDevis(){
 }
 
 /**
- * @brief Calcul le total des crédits à payer pour le tour actuel
+ * @brief Calcul le nombre total de crédits à payer pour le tour actuel
  * 
  * @return int Total des crédits à payer
  */
@@ -93,7 +93,7 @@ int Devis::getTotal(){
  * @brief Calcul le devis à payer à partir des des variables du jeu
  * 
  * @param caisses Liste des caisses
- * @param nbCaisses Nombre de caisses dans la liste
+ * @param nbCaisses Nombre de caisses dans la liste. Représente le nombre total de caisses dans l'hypermarché
  * @param clientsEnAttente Nombre de clients en attente au tour actuel
  */
 void Devis::calculerDevis(Caisse *caisses[NB_CAISSES], int nbCaisses, int clientsEnAttente){

@@ -4,24 +4,31 @@
 
 using namespace std;
 
-/* Constructeur de l'objec caisse contenant les clients en une caisse
-* l'etat de la caisse : ouverte (true) / fermée (false)
-* et le flag etat_a_changer si il fuat changer l'etat de la caisse au prochain tour
-*/
+/**
+ * @brief Constructeur de l'objet Caisse. Contient les clients dans une caisse
+ * l'etat de la caisse : ouverte (true) / fermée (false)
+ * et le flag etatAChanger qui indique si l'etat de la caisse doit être changé au prochain tour
+ */
 Caisse::Caisse(){
     this->clientsEnCaisse=CLIENT_EN_CAISSE_DEBUT;
     this->ouverte=false;
     this->etatAChanger=false;
 }
 
-
-
-/* Supprime un client de la caisse */
+/**
+ * @brief Supprime un client de la caisse
+ */
 void Caisse::sortirClient(){
     this->clientsEnCaisse--;
 }
 
-/* Affichage graphique des clients en caisse représentés par des étoiles */
+/**
+ * @brief Utilisée pour l'affichage graphique de l'état de la caisse au tour actuel
+ * et le nombre de clients en caisse 
+ * 
+ * @return string "[Fermée]" (en rouge)   -- OU --  
+ * "[Ouverte]" (en vert) + "| Clients :" + un nombre d'étoiles correspondant au nombre de clients en caisse + nombre de clients
+ */
 string Caisse::afficheInfoCaisse(){
 
     // retourne "Fermée" en couleur rouge si la caisse est fermée
@@ -41,57 +48,85 @@ string Caisse::afficheInfoCaisse(){
     info.append(")");
 
     return info;
-
 }
 
-/* Fonction utilisée pour connaître l'état d'une caisse
-* retourne la valeur (true/false) contenue dans "ouverte" */
+
+/**
+ * @brief Indique l'état de l'attribut de classe "ouverte"
+ * 
+ * @return true si la caisse est ouverte
+ * @return false si la caisse est fermée
+ */
 bool Caisse::estOuverte(){
     return ouverte;
 }
 
-/* Ajoute un client en caisse */
+/**
+ * @brief Ajoute un client dans 1 caisse
+ * 
+ */
 void Caisse::ajouterClientEnCaisse(){
     this->clientsEnCaisse++;
 }
 
-/* Fonction utilisée au moment d'ouvrir une caisse 
-* Change l'état de "ouverte" à true */
+/**
+ * @brief Utilisée au moment d'ouvrir une caisse
+ * Change l'état de l'attribut de classe "ouverte" à true
+ */
 void Caisse::ouvrirCaisse(){
     this->ouverte=true;
 }
 
-/* Fonction utilisée au moment d'ouvrir une caisse 
-* Change l'état de "ouverte" à false */
+/**
+ * @brief Utilisée au moment de fermer une caisse
+ * Change l'état de l'attribut de classe "ouverte" à false
+ */
 void Caisse::fermerCaisse(){
     this->ouverte=false;
 }
 
-/* Retourne le nombre de clients contenus dans 1 caisse */
+/**
+ * @brief Getter du nombre de clients dans 1 caisse
+ * 
+ * @return int nombre de clients contenus dans 1 caisse
+ */
 int Caisse::getClientsEnCaisse(){
     return this->clientsEnCaisse;
 }
 
-/* Réinitialise le nombre de clients contenus dans 1 caisse à 0 */
+/**
+ * @brief Réinitialise le nombre de clients contenus dans 1 caisse à 0
+ * 
+ */
 void Caisse::resetClientsEnCaisse(){
     this->clientsEnCaisse=0;
 }
 
-/* Inverse l'état de "etat_a_changer" afin de savoir si la caisse 
-* doit ouvrir ou fermer au prochain tour 
-*/
+/**
+ * @brief Inverse l'état de "etatAChanger" afin de savoir si la caisse 
+ * doit ouvrir ou fermer au prochain tour 
+ */
 void Caisse::changerEtat(){
     this->etatAChanger=!this->etatAChanger;
 }
 
-/* Réinitialise l'état de "etat_a_changer" à false (valeur par défaut)*/
+/**
+ * @brief Réinitialise l'état de "etat_a_changer" à false (valeur par défaut)
+ * 
+ */
 void Caisse::resetChangement(){
     this->etatAChanger=false;
 }
 
-/* Affiche sur le coté gauche du terminal et entre crochets,
-* les caisses dont l'état va changer au prochain tour
-*/
+/**
+ * @brief Permet d'obtenir une chaîne de caractères qui indique si l'état de la caisse va changer au prochain tour 
+ * Contient :  
+ * "[-]" (Etat identique au tour actuel )
+ * "[F]" (Fermée au tour suivant)
+ * "[O]" (Ouverte au tour suivant)
+ * 
+ * @return string "[-]" OU "[F]" OU "[O]"
+ */
 string Caisse::getChangement(){
     if(this->etatAChanger==false){
         // Affiche un tiret Jaune
@@ -107,16 +142,29 @@ string Caisse::getChangement(){
     }
 }
 
-/* Retourne la valeur de "etat a changer" */
+/**
+ * @brief Getter de la valeur de "etatAChanger"
+ * 
+ * @return true si la caisse doit changer d'état au prochain tour
+ * @return false si la caisse conserve son etat actuel au prochain tour
+ */
 bool Caisse::aChanger(){
     return this->etatAChanger;
 }
-/* Inverse l'état d'ouverture actuel de la caisse */
+
+/**
+ * @brief Inverse l'état (d'ouverte à fermée / de fermée à ouverte) de la caisse actuelle
+ * 
+ */
 void Caisse::changerCaisse(){
     this->ouverte = !this->ouverte;
 }
 
-/* Retourne le nombre de clients sortis */
+/**
+ * @brief Obtenir le nombre de clients totaux sortis d'une caisse (contenus dans l'attribut "clientsSortis")
+ * 
+ * @return int nombre de clients sortis de la caisse
+ */
 int Caisse::sortirTousLesClients(){
     uint16_t clientsSortis = this->clientsEnCaisse;
     this->clientsEnCaisse=0;

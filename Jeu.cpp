@@ -6,7 +6,7 @@ using namespace std;
 
 /**
  * @brief Constructeur par défaut de la classe Jeu
- * 
+ *
  */
 Jeu::Jeu(){
 
@@ -75,9 +75,9 @@ bool Jeu::hypermarcheEstVide(){
 }
 
 /**
- * @brief Accesseur du tour actuel
+ * @brief Accesseur du numéro du tour actuel
  * 
- * @return int Tour actuel
+ * @return int numéro du tour actuel
  */
 int Jeu::getTour(){
     return this->tour;
@@ -143,7 +143,7 @@ void Jeu::sortirClientsDesCaisses(){
 }
 
 /**
- * @brief Attribue un nombre aléatoir de clients en attente
+ * @brief Attribue un nombre aléatoire de clients en attente
  * 
  * @return int le nombre de clients qui sont mis en attente ou -1 s'il y a un nombre négatif de clients qui font les courses
  */
@@ -177,7 +177,7 @@ int Jeu::mettreClientsEnAttente()
 }
 
 /**
- * @brief Fonction qui envoie les clients en attente dans des caisses ouvertes
+ * @brief Envoie les clients en attente dans les caisses ouvertes
  * 
  * @return int 0 si aucun clients n'a été envoyé en caisse, 1 si les clients en attente ont été envoyé en caisse, -1 s'il y a eu un problème
  */
@@ -208,8 +208,8 @@ int Jeu::metttreClientsEnCaisses()
         this->caisses[caisseOuverteAleatoire]->ajouterClientEnCaisse();
     }
 
-    /* Lorsque tous les clients en attente on été placés, on remet le nombre de clients en attente à 0
-    et on renvoie 1 */
+    /* Lorsque tous les clients en attente on été placés, 
+    on remet le nombre de clients en attente à 0 et on renvoie 1 */
     this->clientsEnAttente=0;
     return 1;
 }
@@ -217,8 +217,8 @@ int Jeu::metttreClientsEnCaisses()
 /**
  * @brief Demande l'action que le joueur souhaite faire sur les caisses, le joueur peut choisir d'ouvrir/fermer une ou toutes les caisses ou de passer le tour
  * 
- * @return true Si le joueur a choisi de passer le tour
- * @return false Si le joueur a choisi d'ouvir/fermer une caisse ou toutes les caisses ou s'il y a eu une erreur de saisie
+ * @return true Si le joueur a choisi de passer le tour.
+ * @return false  Si le joueur a choisi d'ouvir/fermer une caisse ou toutes les caisses ou s'il y a eu une erreur de saisie.
  */
 bool Jeu::actionsSurCaisses(){
 
@@ -280,7 +280,7 @@ bool Jeu::actionsSurCaisses(){
 }
 
 /**
- * @brief Inversion de l'état des caisses sélectionnées par le joueur
+ * @brief Inverse l'état des caisses sélectionnées par le joueur
  * 
  */
 void Jeu::changerCaisses(){
@@ -306,7 +306,8 @@ void Jeu::facturation(){
 }
 
 /**
- * @brief Affiche les états des caisses, ex : [-]   Caisse 1:   [Fermée]
+ * @brief Affiche les états des caisses.
+ * Ex : [-]   Caisse 1:   [Fermée]
  * 
  */
 void Jeu::afficheEtatsCaisses(){

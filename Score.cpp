@@ -9,20 +9,32 @@
 
 using namespace std;
 
-/* Constructeur contenant le nom du joueur et son score 
-* Nom du joueur vide au départ, score initialisé à 0 */
-Score::Score(){
+/**
+ * @brief Constructeur contenant le nom du joueur et son score 
+ * Nom du joueur vide au départ, score initialisé à 0
+ * 
+ */
+ Score::Score(){
     this->nomJoueur="";
     this->score=0;
 }
 
+/**
+ * @brief Utilisée si le joueur souhaite recommencer une partie
+ * Remise à vide de la chaîne de caractères "nomJoueur" contenant le nom du joueur actuel
+ * Remise à zero du score du joueur actuel
+ */
 void Score::reset(){
     this->nomJoueur="";
     this->score=0;
 }
 
-/* Demande le nom du joueur et le renvoie en tant que chaine de caractères 
-* @return nom du joueur*/
+/**
+ * @brief Demande le nom du joueur actuel. 
+ * Vérifie qu il n'a pas donné une réponse vide
+ * 
+ * @return string nom du joueur actuel
+ */
 string Score::demanderNomJoueur(){
 
     string nomJoueur;
@@ -40,42 +52,60 @@ string Score::demanderNomJoueur(){
     return nomJoueur;
 }
 
-/* Getter du nom du joueur en cours 
-* @return nom du joueur*/
+/**
+ * @brief Getter du nom du joueur en cours
+ * 
+ * @return string nom du joueur en cours
+ */
 string Score::getNomJoueur(){
     // cout << "Votre nom est: " << this->nomJoueur <<endl;
     return this->nomJoueur;
 }
 
-/* Setter du nom du joueur en cours 
-* @param: nom du joueur */
+/**
+ * @brief Setter du nom du joueur en cours
+ * 
+ * @param nomJoueur nom du joueur en cours
+ */
 void Score::setNomJoueur(string nomJoueur){
     this->nomJoueur = nomJoueur ;
 }
 
-/* Getter du score du joueur actuel */
+/**
+ * @brief Getter du score du joueur actuel 
+ * 
+ * @return int score du joueur actuel
+ */
 int Score::getScore(){
     return this->score;
 }
 
-
-/* Setter du score du joueur actuel */
+/**
+ * @brief Setter du score du joueur actuel
+ * 
+ * @param newScore score du joueur obtenu par le joueur actuel
+ */
 void Score::setScore(int newScore){
     this->score = newScore;
 }
 
-/* Vérifie que le fichier <filename> existe
-* retourne true si il existe, false sinon 
-* @param: nom du fichier dont on veut vérifier l'existence
-*/
+/**
+ * @brief Permet de savoir si le fichier <filename> existe.
+ * 
+ * @param filename nom du fichier dont on veut vérifier l'existence
+ * @return true si le fichier a été trouvé
+ * @return false si le fichier n'a pas été trouvé
+ */
 bool Score::fichierExiste(string filename) {
   ifstream file(filename);
   return file.good();
 }
 
-/* Crée un fichier <filename> si il n'existe pas 
-* @param: nom du fichier à créer
-*/
+/**
+ * @brief Crée le fichier <filename> si il n'a pas été trouvé
+ * 
+ * @param filename nom du fichier à créer 
+ */
 void Score::creerFichierSiNExistePas(string filename){
     
     if(!fichierExiste(filename)){
@@ -86,11 +116,12 @@ void Score::creerFichierSiNExistePas(string filename){
     }
 }
 
-/* Lit le fichier contenant les scores et affiche 
-* le résultat dans un tableau
-* Si ce tableau contient plus de 10 lignes, il affichera les 10 meilleurs scores des joueurs
-* Si il contient moins de 10 valeurs alors il les affichera toutes 
-* @param: nom du fichier dans lequel sont inscrits les scores */
+/**
+ * @brief Lit le fichier texte contenant les scores et affiche le résultat dans un tableau.
+ * Si ce tableau contient plus de 10 joueurs, il affichiera les 10 meilleurs joueurs et leurs scores.
+ * Si il contient moins de 10 valeurs alors il les affichiera toutes.
+ * @param filename nom du fichier dans lequel sont inscrits les scores.
+ */
 void Score::afficherScoresDepuisFichierTxt(string filename){
     
     creerFichierSiNExistePas(filename);
@@ -126,12 +157,12 @@ void Score::afficherScoresDepuisFichierTxt(string filename){
     scoreFile.close();
 }
 
-
-/* Fonction récursive
-* Fonction qui Trie et insère les noms et scores des joueurs dans un vecteur <scoresTousLesJoueurs>
-* @param: nom du fichier dans lequel sont stockés les scores
-* PS : s'il vous plait Monsieur, mettez nous des points en plus, on a vraiment beaucoup travailé sur ce projet
-*/
+/**
+ * @brief (Fonction récursive) Trie et insère les noms et scores des joueurs dans un vecteur <scoresTousLesJoueurs>
+ * 
+ * @param filename nom du fichier dans lequel sont stockés les scores.
+ * @param scoresTousLesJoueurs Vecteur contenant tous les joueurs et leur scores associés.
+ */
 void Score::ajouterNomsEtScoresDansVecteur(string filename, vector<Score>& scoresTousLesJoueurs){
     
     // Ouvrir le fichier en lecture
@@ -156,7 +187,11 @@ void Score::ajouterNomsEtScoresDansVecteur(string filename, vector<Score>& score
     scoreFile.close();
 }
     
-/* Ajoute le nom et le score du joueur actuel au vecteur <scoresTousLesJoueurs> */
+/**
+ * @brief Ajoute le nom et le score du joueur actuel au vecteur <scoresTousLesJoueurs>.
+ * 
+ * @param scoresTousLesJoueurs Vecteur contenant tous les joueurs et leur scores associés.
+ */
 void Score::ajouterNomEtScoreJoueurActuel(vector<Score>& scoresTousLesJoueurs){
     // Créer une instance de Score contenant le nom et le score du joueur actuel
     Score scoreCourant;
@@ -168,13 +203,25 @@ void Score::ajouterNomEtScoreJoueurActuel(vector<Score>& scoresTousLesJoueurs){
     scoresTousLesJoueurs.push_back(scoreCourant);
 }
 
+/**
+ * @brief Trie les éléments (nom du joueur, score) du vecteur <scoresTousLesJoueurs> par ordre décroissant des scores
+ * 
+ * @param scoresTousLesJoueurs Vecteur contenant tous les joueurs et leur scores associés.
+ */
 void Score::trierScoresParOrdreDecroissant(vector<Score>& scoresTousLesJoueurs){
 
     // Trier les joueurs par ordre décroissant du score
     sort(scoresTousLesJoueurs.begin(), scoresTousLesJoueurs.end(), [](Score s1, Score s2) { return s1.getScore() > s2.getScore(); });
 }
 
-/* Ecriture des joueurs et scores contenus dans <scoresTousLesJoueurs> vers le fichier Scoreboard.txt */ 
+/** Ecriture des joueurs et scores contenus dans <scoresTousLesJoueurs> vers le fichier Scoreboard.txt */ 
+
+/**
+ * @brief Ecris les noms des joueurs et leurs scores associés dans un fichier texte. 
+ * 
+ * @param filename nom du fichier dans lequel les nom et scores seront inscits.
+ * @param scoresTousLesJoueurs Vecteur contenant tous les joueurs et leur scores associés.
+ */
 void Score::ecrireJoueursDansFichierTxt(string filename, vector<Score> scoresTousLesJoueurs){
     // Ouvrir le fichier en écriture et ajouter les joueurs triés au fichier
     ofstream scoreFileOut(filename);
@@ -184,8 +231,11 @@ void Score::ecrireJoueursDansFichierTxt(string filename, vector<Score> scoresTou
     scoreFileOut.close();
 }
 
-
-/* Fonction de mise à jour du tableau des scores avec le joueur actuel */
+/**
+ * @brief Met à jour le tableau des scores avec le nom et le score du joueur actuel
+ * 
+ * @param filename nom du fichier dans lequel les noms et scores seront inscrits
+ */
 void Score::mettreAJourScoreboard(string filename){
     
     vector<Score> scoresTousLesJoueurs;
@@ -206,16 +256,6 @@ void Score::mettreAJourScoreboard(string filename){
     afficherScoresDepuisFichierTxt(filename);
 
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
