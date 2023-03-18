@@ -28,7 +28,6 @@ public:
     void fermerCaisse();
     void changerCaisse();
 
-    // Getter
     int getClientsEnCaisse();
     void resetClientsEnCaisse();
 
